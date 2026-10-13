@@ -1,23 +1,173 @@
 aid: xt-com
 name: XT.COM
-description: 'XT.COM is a company surfaced via the API Evangelist harvest backlog (source: market-gap:crypto-exchanges)
-  and added to the network as a stub for full-pipeline profiling.'
+image: https://a.static-global.com/home_seo/en.jpg
+description: XT.COM is a centralized cryptocurrency exchange offering spot, margin, USDT-M and coin-M futures, copy trading,
+  earn and loan products. Its developer program at doc.xt.com documents REST and WebSocket APIs on sapi.xt.com (spot) and
+  fapi.xt.com (futures), publishes OpenAPI 3.0 contracts for the futures market-data and user APIs in github.com/XtApis/xt-api,
+  an official Python connector (pyxt), and a local MCP server with agent skills (XT TradeKit).
 url: https://raw.githubusercontent.com/api-evangelist/xt-com/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:market-gap:crypto-exchanges
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-13 (local-v5; was harvest)
 specificationVersion: '0.20'
 created: '2026-10-13'
 modified: '2026-10-13'
 tags:
 - Company
-apis: []
+- Cryptocurrency
+- Exchange
+- Trading
+- Futures
+- Market Data
+- Blockchain
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: RateLimits
+  url: rate-limits/xt-com-rate-limits.yml
+- type: Authentication
+  url: authentication/xt-com-authentication.yml
+- type: ErrorCatalog
+  url: errors/xt-com-error-codes.yml
+- type: Overlay
+  url: overlays/xt-com-futures-market-overlay.yaml
+- type: AgenticAccess
+  url: agentic-access/xt-com-agentic-access.yml
+- type: Spectral
+  url: rules/xt-com-rules.yml
+- type: JSONLD
+  url: json-ld/xt-com-context.jsonld
+- type: Vocabulary
+  url: vocabulary/xt-com-vocabulary.yml
+- type: DataModel
+  url: data-model/xt-com-data-model.yml
+- type: ErrorCatalog
+  url: errors/xt-com-problem-types.yml
+- type: Conformance
+  url: conformance/xt-com-conformance.yml
+- type: WellKnown
+  url: well-known/xt-com-well-known.yml
+- type: Hosts
+  url: hosts/xt-com-hosts.yml
+- type: Vendors
+  url: vendors/xt-com-vendors.yml
+- type: SDKs
+  url: packages/xt-com-packages.yml
+- type: Packages
+  url: packages/xt-com-packages.yml
+- type: DomainSecurity
+  url: security/xt-com-domain-security.yml
 - type: Website
   url: https://www.xt.com
+- type: DeveloperPortal
+  url: https://doc.xt.com
+- type: Documentation
+  url: https://doc.xt.com
+- type: GettingStarted
+  url: https://doc.xt.com/index/quick-start
+- type: GitHubOrganization
+  url: https://github.com/XtApis
+- type: Blog
+  url: https://www.xt.com/en/blog
+- type: Pricing
+  url: https://www.xt.com/en/price
+- type: SignUp
+  url: https://www.xt.com/en/accounts/register
+- type: Login
+  url: https://www.xt.com/en/accounts/login
+- type: Support
+  url: https://support.xt.com/hc/zh-cn
+apis:
+- aid: xt-com:futures-market-api
+  name: XT.COM Futures Market API
+  description: 'Public futures market data from XT.COM: contracts, tickers, depth, klines, funding rates, mark and index prices,
+    open interest and risk balances. Contract published by XT.COM in github.com/XtApis/xt-api (api-docs/en/contract/biz-quotation.yml);
+    live paths sit under the /future/market prefix on fapi.xt.com.'
+  humanURL: https://doc.xt.com/futures
+  baseURL: https://fapi.xt.com/future/market
+  tags:
+  - Futures
+  - Market Data
+  properties:
+  - type: OpenAPI
+    url: openapi/xt-com-futures-market-openapi.yml
+  - type: OpenAPI
+    name: OpenAPI (provider-hosted)
+    url: https://raw.githubusercontent.com/XtApis/xt-api/main/api-docs/en/contract/biz-quotation.yml
+  - type: Documentation
+    url: https://doc.xt.com/futures
+  - type: JSONSchema
+    url: json-schema/xt-com-contract-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-order-book-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-symbol-bracket-cache-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-event-future-config-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-risk-balance-vo-schema.json
+- aid: xt-com:futures-user-api
+  name: XT.COM Futures User API
+  description: 'Authenticated XT.COM futures account and trading API: account info, balances, positions, orders, entrust/plan
+    orders, leverage and transfer operations. Contract published by XT.COM in github.com/XtApis/xt-api (api-docs/en/user/biz-user.yml);
+    live paths sit under the /future/user prefix on fapi.xt.com.'
+  humanURL: https://doc.xt.com/futures
+  baseURL: https://fapi.xt.com/future/user
+  tags:
+  - Futures
+  - Trading
+  properties:
+  - type: OpenAPI
+    url: openapi/xt-com-futures-user-openapi.yml
+  - type: OpenAPI
+    name: OpenAPI (provider-hosted)
+    url: https://raw.githubusercontent.com/XtApis/xt-api/main/api-docs/en/user/biz-user.yml
+  - type: Documentation
+    url: https://doc.xt.com/futures
+  - type: JSONSchema
+    url: json-schema/xt-com-user-step-apply-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-collection-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-auto-deleverage-history-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-satisfaction-feedback-type-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-detail-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-deposit-coupon-detail-vo-schema.json
+- aid: xt-com:spot-api
+  name: XT.COM Spot API
+  description: XT.COM spot trading REST API (v4) for market data, orders, balances, deposits and withdrawals. Documented at
+    doc.xt.com/spot; no machine-readable contract is published for it.
+  humanURL: https://doc.xt.com/spot
+  baseURL: https://sapi.xt.com
+  tags:
+  - Spot
+  - Trading
+  properties:
+  - type: Documentation
+    url: https://doc.xt.com/spot
+- aid: xt-com:tradekit-mcp
+  name: XT TradeKit MCP Server
+  description: Local stdio MCP server and agent skills published by XT.COM for market research and spot/futures trading from
+    AI assistants.
+  humanURL: https://github.com/XtApis/AItradekit
+  baseURL: https://sapi.xt.com
+  tags:
+  - MCP
+  - Agents
+  properties:
+  - type: MCPServer
+    url: mcp/xt-com-mcp.yml
+x-enrichment:
+  date: '2026-10-13'
+  status: enriched
+  artifacts_added: 12
+  pass: local-v5

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/xt-com/main/json-schema/xt-com-common-response-list-event-future-config-vo-schema.json",
+  "title": "CommonResponse«List«EventFutureConfigVO»»",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«EventFutureConfigVO»»",
+  "type": "object",
+  "properties": {
+    "error": {
+      "$ref": "#/$defs/ErrorMessage"
+    },
+    "msgInfo": {
+      "type": "string"
+    },
+    "result": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EventFutureConfigVO"
+      }
+    },
+    "returnCode": {
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  "$defs": {
+    "ErrorMessage": {
+      "title": "ErrorMessage",
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "code": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "EventFutureConfigVO": {
+      "title": "EventFutureConfigVO",
+      "type": "object",
+      "properties": {
+        "amountConfig": {
+          "type": "string",
+          "description": "预设金额"
+        },
+        "amountScale": {
+          "type": "integer",
+          "description": "金额精度",
+          "format": "int32"
+        },
+        "cycleConfig": {
+          "type": "string",
+          "description": "周期配置"
+        },
+        "maxAmount": {
+          "type": "number",
+          "description": "最大下单金额",
+          "format": "bigdecimal"
+        },
+        "minAmount": {
+          "type": "number",
+          "description": "最小下单金额",
+          "format": "bigdecimal"
+        },
+        "state": {
+          "type": "integer",
+          "description": "状态",
+          "format": "int32"
+        },
+        "symbol": {
+          "type": "string",
+          "description": "交易对"
+        }
+      }
+    }
+  }
+}

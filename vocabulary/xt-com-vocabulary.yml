@@ -1,0 +1,413 @@
+generated: '2026-10-13'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/xt-com-futures-market-openapi.yml
+- openapi/xt-com-futures-user-openapi.yml
+vocabulary:
+  name: XT.COM Domain Vocabulary
+  description: 'Terms declared by XT.COM''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-13'
+  terms:
+  - term: basic-error-controller
+    definition: Basic Error Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: operation-handler
+    definition: Operation Handler
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: web-mvc-links-handler
+    definition: Web Mvc Links Handler
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 内部获取交易对配置信息
+    definition: Internal Cg V 2 Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 内部获取行情信息
+    definition: Internal Quotation Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 合约信息
+    definition: Contract Info Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 外部接口信息
+    definition: External Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 市场异动
+    definition: Market Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 服务器时间
+    definition: Server Time Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 杠杆分层
+    definition: Leverage Bracket Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 获取事件合约配置信息
+    definition: Event Future Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 获取交易对配置信息
+    definition: Symbol Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 获取交易对配置信息(v2)
+    definition: Symbol V 2 Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 获取交易对配置信息(v3)
+    definition: Symbol V 3 Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 获取板块配置信息
+    definition: Plate Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 行情接口
+    definition: Internal Quotation V 2 Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: 行情类接口
+    definition: Merchant Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-market-openapi.yml
+  - term: listenKey
+    definition: Listen Key Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: symbol-controller
+    definition: Symbol Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 分享
+    definition: Share Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 合约告知书
+    definition: Notice Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 合约聪明钱
+    definition: Smart Money Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 合约聪明钱-order
+    definition: Smart Money Order Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 外部兼容接口
+    definition: Compat Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 接管记录
+    definition: Take Over Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 操盘手相关
+    definition: Trader Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 用户合约相关信息
+    definition: Account Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 用户满意度反馈
+    definition: User Satisfaction Feedback Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 用户福利-赠金
+    definition: Welfare Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 用户自动减仓
+    definition: Auto Deleverage Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 用户设置
+    definition: User Setting Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 用户资金相关
+    definition: Balance Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 用户阶梯等级费率
+    definition: User Step Rate Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 自选交易对
+    definition: User Collection Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: 通用功能接口
+    definition: Common Controller
+    tags:
+    - Resource Group
+    source: openapi/xt-com-futures-user-openapi.yml
+  - term: AggTickerVO
+    definition: 'Object declared by the contract with fields: a, ap, bp, c, h, i, l, m, o, r, s, t. (1 more)'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/AggTickerVO
+  - term: CoinDetailVO
+    definition: 'Object declared by the contract with fields: actualPrecision, coin, displayPrecision, spotCoin.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CoinDetailVO
+  - term: CommonResponse«AggTickerVO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«AggTickerVO»
+  - term: CommonResponse«DepthVO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«DepthVO»
+  - term: CommonResponse«EventFutureLimitInfoVO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«EventFutureLimitInfoVO»
+  - term: CommonResponse«FundRateDTO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«FundRateDTO»
+  - term: CommonResponse«List«AggTickerVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«AggTickerVO»»
+  - term: CommonResponse«List«CoinDetailVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«CoinDetailVO»»
+  - term: CommonResponse«List«DealVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«DealVO»»
+  - term: CommonResponse«List«EventFutureConfigVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«EventFutureConfigVO»»
+  - term: CommonResponse«List«FundRateRecordVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«FundRateRecordVO»»
+  - term: CommonResponse«List«IndexPriceDTO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«IndexPriceDTO»»
+  - term: CommonResponse«List«InternalFilterSymbolVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«InternalFilterSymbolVO»»
+  - term: CommonResponse«List«InternalSymbolCacheDTO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«InternalSymbolCacheDTO»»
+  - term: CommonResponse«List«InternalTenantSymbolCacheDTO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«InternalTenantSymbolCacheDTO»»
+  - term: CommonResponse«List«KlineDTO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«KlineDTO»»
+  - term: CommonResponse«List«KlineVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«KlineVO»»
+  - term: CommonResponse«List«MarketCategoryVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«MarketCategoryVO»»
+  - term: CommonResponse«List«OpenPriceVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«OpenPriceVO»»
+  - term: CommonResponse«List«PlateVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«PlateVO»»
+  - term: CommonResponse«List«PriceVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«PriceVO»»
+  - term: CommonResponse«List«SymbolBracketCacheDTO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«SymbolBracketCacheDTO»»
+  - term: CommonResponse«List«SymbolCacheDTO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«SymbolCacheDTO»»
+  - term: CommonResponse«List«TickerBookVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«TickerBookVO»»
+  - term: CommonResponse«List«TickerVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«TickerVO»»
+  - term: CommonResponse«List«string»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«string»»
+  - term: CommonResponse«MongoPageResult«FundRateRecordVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«MongoPageResult«FundRateRecordVO»»
+  - term: CommonResponse«MongoPageResult«RiskBalanceVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«MongoPageResult«RiskBalanceVO»»
+  - term: CommonResponse«OpenInterestVO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«OpenInterestVO»
+  - term: CommonResponse«PageResult«MMTradeVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«PageResult«MMTradeVO»»
+  - term: CommonResponse«PageResult«MarketVO»»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«PageResult«MarketVO»»
+  - term: CommonResponse«PriceVO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«PriceVO»
+  - term: CommonResponse«SymbolBracketVO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«SymbolBracketVO»
+  - term: CommonResponse«SymbolCacheDTO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«SymbolCacheDTO»
+  - term: CommonResponse«SymbolListDTO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«SymbolListDTO»
+  - term: CommonResponse«TickerBookVO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«TickerBookVO»
+  - term: CommonResponse«TickerVO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«TickerVO»
+  - term: CommonResponse«TradeStatsVO»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«TradeStatsVO»
+  - term: CommonResponse«boolean»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«boolean»
+  - term: CommonResponse«long»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«long»
+  - term: CommonResponse«string»
+    definition: 'Object declared by the contract with fields: error, msgInfo, result, returnCode.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«string»
+  - term: ContractVO
+    definition: 'Object declared by the contract with fields: ask, base_currency, base_volume, bid, collection_internal, contractSize, end_timestamp,
+      funding_rate, high, id, index_currency, index_name. (13 more)'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/ContractVO
+  - term: CountryAgentUidFilterRequest
+    definition: 'Object declared by the contract with fields: countryCode, symbol, userId.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/CountryAgentUidFilterRequest
+  - term: DealVO
+    definition: 'Object declared by the contract with fields: a, m, p, s, t.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/DealVO
+  - term: DepthVO
+    definition: 'Object declared by the contract with fields: a, b, s, t, u.'
+    tags:
+    - Object
+    source: openapi/xt-com-futures-market-openapi.yml#/components/schemas/DepthVO

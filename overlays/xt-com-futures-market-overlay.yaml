@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: XT.COM futures-market API overlay (API Evangelist)
+  version: 1.0.0
+  x-generated: '2026-10-13'
+  x-method: generated
+extends: openapi/xt-com-futures-market-openapi.yml
+actions:
+- target: $.servers
+  description: The published contract carries a Springfox "Inferred Url" server of https://fapi.xt.com with no path prefix; probing on 2026-10-13
+    showed the operations answer under /future/market (e.g. https://fapi.xt.com/future/market/v1/public/symbol/coins 200, https://fapi.xt.com/future/user/v1/account/info
+    400 without credentials).
+  update:
+  - url: https://fapi.xt.com/future/market
+    description: XT.COM futures production host with the /future/market prefix (probed 2026-10-13)

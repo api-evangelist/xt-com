@@ -1,0 +1,127 @@
+generated: '2026-10-13'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 9
+  own: 8
+  other_domain: 0
+  platform: 1
+  roles:
+  - api
+  - other
+  - portal
+  - source
+  - support
+  - website
+hosts:
+- host: api.xt.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: xt.com
+  role: api
+  relation: own
+- host: apidoc.xt.com
+  found_by:
+  - docs-index
+  types: []
+  serves:
+  - docs
+  registrable_domain: xt.com
+  role: other
+  relation: own
+- host: doc.xt.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - DeveloperPortal
+  - Documentation
+  - GettingStarted
+  serves:
+  - docs
+  registrable_domain: xt.com
+  role: portal
+  relation: own
+- host: fapi.xt.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: xt.com
+  role: other
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - GitHubOrganization
+  serves:
+  - docs
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: labs.xt.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: xt.com
+  role: other
+  relation: own
+- host: sapi.xt.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: xt.com
+  role: other
+  relation: own
+- host: support.xt.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Support
+  serves:
+  - support
+  vendor: zendesk
+  registrable_domain: xt.com
+  role: support
+  relation: own
+- host: www.xt.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Website
+  - Blog
+  - Pricing
+  - SignUp
+  - Login
+  serves:
+  - cdn
+  vendor: cloudfront
+  registrable_domain: xt.com
+  role: website
+  relation: own

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/xt-com/main/json-schema/xt-com-common-response-mongo-page-result-risk-balance-vo-schema.json",
+  "title": "CommonResponse«MongoPageResult«RiskBalanceVO»»",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«MongoPageResult«RiskBalanceVO»»",
+  "type": "object",
+  "properties": {
+    "error": {
+      "$ref": "#/$defs/ErrorMessage"
+    },
+    "msgInfo": {
+      "type": "string"
+    },
+    "result": {
+      "$ref": "#/$defs/MongoPageResult«RiskBalanceVO»"
+    },
+    "returnCode": {
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  "$defs": {
+    "ErrorMessage": {
+      "title": "ErrorMessage",
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "code": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "MongoPageResult«RiskBalanceVO»": {
+      "title": "MongoPageResult«RiskBalanceVO»",
+      "type": "object",
+      "properties": {
+        "hasNext": {
+          "type": "boolean",
+          "description": "是否有下一页"
+        },
+        "hasPrev": {
+          "type": "boolean",
+          "description": "是否有上一页"
+        },
+        "items": {
+          "type": "array",
+          "description": "数据列表",
+          "items": {
+            "$ref": "#/$defs/RiskBalanceVO"
+          }
+        }
+      }
+    },
+    "RiskBalanceVO": {
+      "title": "RiskBalanceVO",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "余额",
+          "format": "bigdecimal"
+        },
+        "coin": {
+          "type": "string",
+          "description": "币种"
+        },
+        "createdTime": {
+          "type": "integer",
+          "description": "时间",
+          "format": "int64"
+        },
+        "id": {
+          "type": "integer",
+          "description": "id",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}

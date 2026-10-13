@@ -1,0 +1,20 @@
+generated: '2026-10-13'
+method: none
+source:
+- https://zapier.com/apps/xt-com/integrations
+- https://zapier.com/apps/xt/integrations
+- https://n8n.io/integrations/xt-com/
+- https://n8n.io/integrations/xt/
+- https://composio.dev/toolkits/xt-com
+- https://monid.ai/tools/xt-com
+checked:
+- https://composio.dev/toolkits/xt-com
+- https://monid.ai/tools/xt-com
+- https://n8n.io/integrations/xt-com/
+- https://n8n.io/integrations/xt/
+- https://zapier.com/apps/xt-com/integrations
+- https://zapier.com/apps/xt/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []

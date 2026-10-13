@@ -1,0 +1,18 @@
+generated: '2026-10-13'
+method: searched
+source: https://github.com/XtApis/xt-api/blob/main/docs/futures/Access%20Description/signStatement.mdx
+docs: https://doc.xt.com/futures
+schemes:
+- name: XT HMAC signature headers
+  type: apiKey
+  in: header
+  headers:
+  - validate-appkey
+  - validate-timestamp
+  - validate-signature
+  - validate-recvwindow
+  - validate-algorithms
+  description: API key (validate-appkey) plus an HMAC signature (validate-signature,
+    default HmacSHA256; HmacMD5/SHA1/SHA224/SHA384/SHA512 supported) over the request,
+    with a millisecond timestamp and a recvwindow (default 5 s, max 60 s). The published
+    OpenAPI files declare no securitySchemes; this is read from the docs.

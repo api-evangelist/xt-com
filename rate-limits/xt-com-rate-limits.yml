@@ -1,0 +1,13 @@
+generated: '2026-10-13'
+method: searched
+source: https://github.com/XtApis/xt-api/blob/main/docs/spot/Access%20Description/limitRules.mdx
+name: XT.COM API rate limits
+limits:
+- name: Gateway IP flow limit
+  scope: ip
+  limit_text: per-interface, stated on each endpoint as N/s/ip (e.g. 100/s/ip)
+- name: Gateway apiKey flow limit
+  scope: apiKey
+  limit_text: per-interface, stated on each endpoint as N/s/apiKey (e.g. 50/s/apiKey)
+signaling: HTTP 429 when the gateway limit is exceeded; the IP or apiKey is blocked.
+  A separate WAF flow limit also applies.

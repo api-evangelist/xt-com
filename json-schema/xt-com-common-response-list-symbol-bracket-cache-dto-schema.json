@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/xt-com/main/json-schema/xt-com-common-response-list-symbol-bracket-cache-dto-schema.json",
+  "title": "CommonResponse«List«SymbolBracketCacheDTO»»",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/xt-com-futures-market-openapi.yml#/components/schemas/CommonResponse«List«SymbolBracketCacheDTO»»",
+  "type": "object",
+  "properties": {
+    "error": {
+      "$ref": "#/$defs/ErrorMessage"
+    },
+    "msgInfo": {
+      "type": "string"
+    },
+    "result": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SymbolBracketCacheDTO"
+      }
+    },
+    "returnCode": {
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  "$defs": {
+    "ErrorMessage": {
+      "title": "ErrorMessage",
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "code": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "LeverageBracketCacheDTO": {
+      "title": "LeverageBracketCacheDTO",
+      "type": "object",
+      "properties": {
+        "bracket": {
+          "type": "integer",
+          "description": "档位",
+          "format": "int32"
+        },
+        "maintMarginRate": {
+          "type": "number",
+          "description": "维持保证金率",
+          "format": "bigdecimal"
+        },
+        "maxLeverage": {
+          "type": "number",
+          "description": "最大杠杆倍数",
+          "format": "bigdecimal"
+        },
+        "maxNominalValue": {
+          "type": "number",
+          "description": "该层最大名义价值",
+          "format": "bigdecimal"
+        },
+        "maxStartMarginRate": {
+          "type": "number",
+          "description": "最大起始保证金率",
+          "format": "bigdecimal"
+        },
+        "minLeverage": {
+          "type": "number",
+          "description": "最小杠杆倍数",
+          "format": "bigdecimal"
+        },
+        "startMarginRate": {
+          "type": "number",
+          "description": "起始保证金率",
+          "format": "bigdecimal"
+        },
+        "symbol": {
+          "type": "string",
+          "description": "交易对"
+        }
+      }
+    },
+    "SymbolBracketCacheDTO": {
+      "title": "SymbolBracketCacheDTO",
+      "type": "object",
+      "properties": {
+        "leverageBrackets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LeverageBracketCacheDTO"
+          }
+        },
+        "symbol": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

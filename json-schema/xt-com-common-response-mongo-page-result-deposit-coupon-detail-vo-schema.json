@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/xt-com/main/json-schema/xt-com-common-response-mongo-page-result-deposit-coupon-detail-vo-schema.json",
+  "title": "CommonResponse«MongoPageResult«DepositCouponDetailVO»»",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/xt-com-futures-user-openapi.yml#/components/schemas/CommonResponse«MongoPageResult«DepositCouponDetailVO»»",
+  "type": "object",
+  "properties": {
+    "error": {
+      "$ref": "#/$defs/ErrorMessage"
+    },
+    "msgInfo": {
+      "type": "string"
+    },
+    "result": {
+      "$ref": "#/$defs/MongoPageResult«DepositCouponDetailVO»"
+    },
+    "returnCode": {
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  "$defs": {
+    "DepositCouponDetailVO": {
+      "title": "DepositCouponDetailVO",
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "number",
+          "description": "储值券金额",
+          "format": "bigdecimal"
+        },
+        "bizId": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string",
+          "description": "币种"
+        },
+        "currencyId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "expireTime": {
+          "type": "integer",
+          "description": "失效时间",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ErrorMessage": {
+      "title": "ErrorMessage",
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "code": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "MongoPageResult«DepositCouponDetailVO»": {
+      "title": "MongoPageResult«DepositCouponDetailVO»",
+      "type": "object",
+      "properties": {
+        "hasNext": {
+          "type": "boolean",
+          "description": "是否有下一页"
+        },
+        "hasPrev": {
+          "type": "boolean",
+          "description": "是否有上一页"
+        },
+        "items": {
+          "type": "array",
+          "description": "数据列表",
+          "items": {
+            "$ref": "#/$defs/DepositCouponDetailVO"
+          }
+        }
+      }
+    }
+  }
+}

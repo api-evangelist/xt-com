@@ -1,0 +1,1063 @@
+{
+  "@context": {
+    "@vocab": "https://xt.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xt": "https://xt.com/schema#",
+    "AggTickerVO": "xt:AggTickerVO",
+    "a": {
+      "@id": "xt:a",
+      "@type": "xsd:string"
+    },
+    "ap": {
+      "@id": "xt:ap",
+      "@type": "xsd:string"
+    },
+    "bp": {
+      "@id": "xt:bp",
+      "@type": "xsd:string"
+    },
+    "c": {
+      "@id": "xt:c",
+      "@type": "xsd:string"
+    },
+    "h": {
+      "@id": "xt:h",
+      "@type": "xsd:string"
+    },
+    "i": {
+      "@id": "xt:i",
+      "@type": "xsd:string"
+    },
+    "l": {
+      "@id": "xt:l",
+      "@type": "xsd:string"
+    },
+    "m": {
+      "@id": "xt:m",
+      "@type": "xsd:string"
+    },
+    "o": {
+      "@id": "xt:o",
+      "@type": "xsd:string"
+    },
+    "r": {
+      "@id": "xt:r",
+      "@type": "xsd:string"
+    },
+    "s": {
+      "@id": "xt:s",
+      "@type": "xsd:string"
+    },
+    "t": {
+      "@id": "xt:t",
+      "@type": "xsd:integer"
+    },
+    "v": {
+      "@id": "xt:v",
+      "@type": "xsd:string"
+    },
+    "CoinDetailVO": "xt:CoinDetailVO",
+    "actualPrecision": {
+      "@id": "xt:actualPrecision",
+      "@type": "xsd:integer"
+    },
+    "coin": {
+      "@id": "xt:coin",
+      "@type": "xsd:string"
+    },
+    "displayPrecision": {
+      "@id": "xt:displayPrecision",
+      "@type": "xsd:integer"
+    },
+    "spotCoin": {
+      "@id": "xt:spotCoin",
+      "@type": "xsd:string"
+    },
+    "CommonResponse«AggTickerVO»": "xt:CommonResponse«AggTickerVO»",
+    "error": {
+      "@id": "xt:error",
+      "@type": "@id"
+    },
+    "msgInfo": {
+      "@id": "xt:msgInfo",
+      "@type": "xsd:string"
+    },
+    "result": {
+      "@id": "xt:result",
+      "@type": "@id"
+    },
+    "returnCode": {
+      "@id": "xt:returnCode",
+      "@type": "xsd:integer"
+    },
+    "CommonResponse«DepthVO»": "xt:CommonResponse«DepthVO»",
+    "CommonResponse«EventFutureLimitInfoVO»": "xt:CommonResponse«EventFutureLimitInfoVO»",
+    "CommonResponse«FundRateDTO»": "xt:CommonResponse«FundRateDTO»",
+    "CommonResponse«List«AggTickerVO»»": "xt:CommonResponse«List«AggTickerVO»»",
+    "CommonResponse«List«CoinDetailVO»»": "xt:CommonResponse«List«CoinDetailVO»»",
+    "CommonResponse«List«DealVO»»": "xt:CommonResponse«List«DealVO»»",
+    "CommonResponse«List«EventFutureConfigVO»»": "xt:CommonResponse«List«EventFutureConfigVO»»",
+    "CommonResponse«List«FundRateRecordVO»»": "xt:CommonResponse«List«FundRateRecordVO»»",
+    "CommonResponse«List«IndexPriceDTO»»": "xt:CommonResponse«List«IndexPriceDTO»»",
+    "CommonResponse«List«InternalFilterSymbolVO»»": "xt:CommonResponse«List«InternalFilterSymbolVO»»",
+    "CommonResponse«List«InternalSymbolCacheDTO»»": "xt:CommonResponse«List«InternalSymbolCacheDTO»»",
+    "CommonResponse«List«InternalTenantSymbolCacheDTO»»": "xt:CommonResponse«List«InternalTenantSymbolCacheDTO»»",
+    "CommonResponse«List«KlineDTO»»": "xt:CommonResponse«List«KlineDTO»»",
+    "CommonResponse«List«KlineVO»»": "xt:CommonResponse«List«KlineVO»»",
+    "CommonResponse«List«MarketCategoryVO»»": "xt:CommonResponse«List«MarketCategoryVO»»",
+    "CommonResponse«List«OpenPriceVO»»": "xt:CommonResponse«List«OpenPriceVO»»",
+    "CommonResponse«List«PlateVO»»": "xt:CommonResponse«List«PlateVO»»",
+    "CommonResponse«List«PriceVO»»": "xt:CommonResponse«List«PriceVO»»",
+    "CommonResponse«List«SymbolBracketCacheDTO»»": "xt:CommonResponse«List«SymbolBracketCacheDTO»»",
+    "CommonResponse«List«SymbolCacheDTO»»": "xt:CommonResponse«List«SymbolCacheDTO»»",
+    "CommonResponse«List«TickerBookVO»»": "xt:CommonResponse«List«TickerBookVO»»",
+    "CommonResponse«List«TickerVO»»": "xt:CommonResponse«List«TickerVO»»",
+    "CommonResponse«List«string»»": "xt:CommonResponse«List«string»»",
+    "CommonResponse«MongoPageResult«FundRateRecordVO»»": "xt:CommonResponse«MongoPageResult«FundRateRecordVO»»",
+    "CommonResponse«MongoPageResult«RiskBalanceVO»»": "xt:CommonResponse«MongoPageResult«RiskBalanceVO»»",
+    "CommonResponse«OpenInterestVO»": "xt:CommonResponse«OpenInterestVO»",
+    "CommonResponse«PageResult«MMTradeVO»»": "xt:CommonResponse«PageResult«MMTradeVO»»",
+    "CommonResponse«PageResult«MarketVO»»": "xt:CommonResponse«PageResult«MarketVO»»",
+    "CommonResponse«PriceVO»": "xt:CommonResponse«PriceVO»",
+    "CommonResponse«SymbolBracketVO»": "xt:CommonResponse«SymbolBracketVO»",
+    "CommonResponse«SymbolCacheDTO»": "xt:CommonResponse«SymbolCacheDTO»",
+    "CommonResponse«SymbolListDTO»": "xt:CommonResponse«SymbolListDTO»",
+    "CommonResponse«TickerBookVO»": "xt:CommonResponse«TickerBookVO»",
+    "CommonResponse«TickerVO»": "xt:CommonResponse«TickerVO»",
+    "CommonResponse«TradeStatsVO»": "xt:CommonResponse«TradeStatsVO»",
+    "CommonResponse«boolean»": "xt:CommonResponse«boolean»",
+    "CommonResponse«long»": "xt:CommonResponse«long»",
+    "CommonResponse«string»": "xt:CommonResponse«string»",
+    "ContractVO": "xt:ContractVO",
+    "ask": {
+      "@id": "xt:ask",
+      "@type": "xsd:string"
+    },
+    "base_currency": {
+      "@id": "xt:base_currency",
+      "@type": "xsd:string"
+    },
+    "base_volume": {
+      "@id": "xt:base_volume",
+      "@type": "xsd:string"
+    },
+    "bid": {
+      "@id": "xt:bid",
+      "@type": "xsd:string"
+    },
+    "collection_internal": {
+      "@id": "xt:collection_internal",
+      "@type": "xsd:integer"
+    },
+    "contractSize": {
+      "@id": "xt:contractSize",
+      "@type": "xsd:decimal"
+    },
+    "end_timestamp": {
+      "@id": "xt:end_timestamp",
+      "@type": "xsd:integer"
+    },
+    "funding_rate": {
+      "@id": "xt:funding_rate",
+      "@type": "xsd:decimal"
+    },
+    "high": {
+      "@id": "xt:high",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "xt:id",
+      "@type": "xsd:integer"
+    },
+    "index_currency": {
+      "@id": "xt:index_currency",
+      "@type": "xsd:string"
+    },
+    "index_name": {
+      "@id": "xt:index_name",
+      "@type": "xsd:string"
+    },
+    "index_price": {
+      "@id": "xt:index_price",
+      "@type": "xsd:string"
+    },
+    "last_price": {
+      "@id": "xt:last_price",
+      "@type": "xsd:string"
+    },
+    "low": {
+      "@id": "xt:low",
+      "@type": "xsd:string"
+    },
+    "next_funding_rate": {
+      "@id": "xt:next_funding_rate",
+      "@type": "xsd:decimal"
+    },
+    "next_funding_rate_timestamp": {
+      "@id": "xt:next_funding_rate_timestamp",
+      "@type": "xsd:integer"
+    },
+    "open_interest": {
+      "@id": "xt:open_interest",
+      "@type": "xsd:decimal"
+    },
+    "product_type": {
+      "@id": "xt:product_type",
+      "@type": "xsd:string"
+    },
+    "start_timestamp": {
+      "@id": "xt:start_timestamp",
+      "@type": "xsd:integer"
+    },
+    "symbol": {
+      "@id": "xt:symbol",
+      "@type": "xsd:string"
+    },
+    "target_currency": {
+      "@id": "xt:target_currency",
+      "@type": "xsd:string"
+    },
+    "target_volume": {
+      "@id": "xt:target_volume",
+      "@type": "xsd:string"
+    },
+    "ticker_id": {
+      "@id": "xt:ticker_id",
+      "@type": "xsd:string"
+    },
+    "underlyingType": {
+      "@id": "xt:underlyingType",
+      "@type": "xsd:integer"
+    },
+    "CountryAgentUidFilterRequest": "xt:CountryAgentUidFilterRequest",
+    "countryCode": {
+      "@id": "xt:countryCode",
+      "@type": "xsd:string"
+    },
+    "userId": {
+      "@id": "xt:userId",
+      "@type": "xsd:integer"
+    },
+    "DealVO": "xt:DealVO",
+    "p": {
+      "@id": "xt:p",
+      "@type": "xsd:decimal"
+    },
+    "DepthVO": "xt:DepthVO",
+    "b": {
+      "@id": "xt:b",
+      "@container": "@list"
+    },
+    "u": {
+      "@id": "xt:u",
+      "@type": "xsd:integer"
+    },
+    "ErrorMessage": "xt:ErrorMessage",
+    "args": {
+      "@id": "xt:args",
+      "@container": "@list"
+    },
+    "code": {
+      "@id": "xt:code",
+      "@type": "xsd:string"
+    },
+    "msg": {
+      "@id": "xt:msg",
+      "@type": "xsd:string"
+    },
+    "EventFutureConfigVO": "xt:EventFutureConfigVO",
+    "amountConfig": {
+      "@id": "xt:amountConfig",
+      "@type": "xsd:string"
+    },
+    "amountScale": {
+      "@id": "xt:amountScale",
+      "@type": "xsd:integer"
+    },
+    "cycleConfig": {
+      "@id": "xt:cycleConfig",
+      "@type": "xsd:string"
+    },
+    "maxAmount": {
+      "@id": "xt:maxAmount",
+      "@type": "xsd:decimal"
+    },
+    "minAmount": {
+      "@id": "xt:minAmount",
+      "@type": "xsd:decimal"
+    },
+    "state": {
+      "@id": "xt:state",
+      "@type": "xsd:integer"
+    },
+    "EventFutureLimitInfoVO": "xt:EventFutureLimitInfoVO",
+    "isFirstUse": {
+      "@id": "xt:isFirstUse",
+      "@type": "xsd:boolean"
+    },
+    "isInLimit": {
+      "@id": "xt:isInLimit",
+      "@type": "xsd:boolean"
+    },
+    "FundRateDTO": "xt:FundRateDTO",
+    "collectionInternal": {
+      "@id": "xt:collectionInternal",
+      "@type": "xsd:integer"
+    },
+    "fundingRate": {
+      "@id": "xt:fundingRate",
+      "@type": "xsd:decimal"
+    },
+    "nextCollectionTime": {
+      "@id": "xt:nextCollectionTime",
+      "@type": "xsd:integer"
+    },
+    "FundRateRecordVO": "xt:FundRateRecordVO",
+    "createdTime": {
+      "@id": "xt:createdTime",
+      "@type": "xsd:integer"
+    },
+    "IndexPriceDTO": "xt:IndexPriceDTO",
+    "InternalFilterSymbolVO": "xt:InternalFilterSymbolVO",
+    "showFlag": {
+      "@id": "xt:showFlag",
+      "@type": "xsd:boolean"
+    },
+    "InternalSymbolCacheDTO": "xt:InternalSymbolCacheDTO",
+    "baseCoin": {
+      "@id": "xt:baseCoin",
+      "@type": "xsd:string"
+    },
+    "cnName": {
+      "@id": "xt:cnName",
+      "@type": "xsd:string"
+    },
+    "contractType": {
+      "@id": "xt:contractType",
+      "@type": "xsd:string"
+    },
+    "deliveryDate": {
+      "@id": "xt:deliveryDate",
+      "@type": "xsd:integer"
+    },
+    "deliveryPrice": {
+      "@id": "xt:deliveryPrice",
+      "@type": "xsd:decimal"
+    },
+    "enDesc": {
+      "@id": "xt:enDesc",
+      "@type": "xsd:string"
+    },
+    "enName": {
+      "@id": "xt:enName",
+      "@type": "xsd:string"
+    },
+    "fullName": {
+      "@id": "xt:fullName",
+      "@type": "xsd:string"
+    },
+    "isDisplay": {
+      "@id": "xt:isDisplay",
+      "@type": "xsd:boolean"
+    },
+    "isOpenApi": {
+      "@id": "xt:isOpenApi",
+      "@type": "xsd:boolean"
+    },
+    "minStepPrice": {
+      "@id": "xt:minStepPrice",
+      "@type": "xsd:decimal"
+    },
+    "onboardDate": {
+      "@id": "xt:onboardDate",
+      "@type": "xsd:integer"
+    },
+    "pair": {
+      "@id": "xt:pair",
+      "@type": "xsd:string"
+    },
+    "pricePrecision": {
+      "@id": "xt:pricePrecision",
+      "@type": "xsd:integer"
+    },
+    "productType": {
+      "@id": "xt:productType",
+      "@type": "xsd:string"
+    },
+    "quoteCoin": {
+      "@id": "xt:quoteCoin",
+      "@type": "xsd:string"
+    },
+    "sequence": {
+      "@id": "xt:sequence",
+      "@type": "xsd:integer"
+    },
+    "symbolGroupId": {
+      "@id": "xt:symbolGroupId",
+      "@type": "xsd:integer"
+    },
+    "tradeSwitch": {
+      "@id": "xt:tradeSwitch",
+      "@type": "xsd:boolean"
+    },
+    "InternalTenantSymbolCacheDTO": "xt:InternalTenantSymbolCacheDTO",
+    "lastIcon": {
+      "@id": "xt:lastIcon",
+      "@type": "xsd:string"
+    },
+    "symbolId": {
+      "@id": "xt:symbolId",
+      "@type": "xsd:integer"
+    },
+    "tenantId": {
+      "@id": "xt:tenantId",
+      "@type": "xsd:integer"
+    },
+    "thanosSwitch": {
+      "@id": "xt:thanosSwitch",
+      "@type": "xsd:boolean"
+    },
+    "KlineDTO": "xt:KlineDTO",
+    "KlineVO": "xt:KlineVO",
+    "LeverageBracketCacheDTO": "xt:LeverageBracketCacheDTO",
+    "bracket": {
+      "@id": "xt:bracket",
+      "@type": "xsd:integer"
+    },
+    "maintMarginRate": {
+      "@id": "xt:maintMarginRate",
+      "@type": "xsd:decimal"
+    },
+    "maxLeverage": {
+      "@id": "xt:maxLeverage",
+      "@type": "xsd:decimal"
+    },
+    "maxNominalValue": {
+      "@id": "xt:maxNominalValue",
+      "@type": "xsd:decimal"
+    },
+    "maxStartMarginRate": {
+      "@id": "xt:maxStartMarginRate",
+      "@type": "xsd:decimal"
+    },
+    "minLeverage": {
+      "@id": "xt:minLeverage",
+      "@type": "xsd:decimal"
+    },
+    "startMarginRate": {
+      "@id": "xt:startMarginRate",
+      "@type": "xsd:decimal"
+    },
+    "Link": "xt:Link",
+    "href": {
+      "@id": "xt:href",
+      "@type": "xsd:string"
+    },
+    "templated": {
+      "@id": "xt:templated",
+      "@type": "xsd:boolean"
+    },
+    "MMTradeVO": "xt:MMTradeVO",
+    "clientOrderId": {
+      "@id": "xt:clientOrderId",
+      "@type": "xsd:string"
+    },
+    "fee": {
+      "@id": "xt:fee",
+      "@type": "xsd:string"
+    },
+    "isMaker": {
+      "@id": "xt:isMaker",
+      "@type": "xsd:boolean"
+    },
+    "marginUnfrozen": {
+      "@id": "xt:marginUnfrozen",
+      "@type": "xsd:string"
+    },
+    "oppositeUserId": {
+      "@id": "xt:oppositeUserId",
+      "@type": "xsd:integer"
+    },
+    "orderId": {
+      "@id": "xt:orderId",
+      "@type": "xsd:string"
+    },
+    "orderSide": {
+      "@id": "xt:orderSide",
+      "@type": "xsd:string"
+    },
+    "positionSide": {
+      "@id": "xt:positionSide",
+      "@type": "xsd:string"
+    },
+    "price": {
+      "@id": "xt:price",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "xt:quantity",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "xt:timestamp",
+      "@type": "xsd:integer"
+    },
+    "MarketCategoryVO": "xt:MarketCategoryVO",
+    "category": {
+      "@id": "xt:category",
+      "@type": "xsd:string"
+    },
+    "desc": {
+      "@id": "xt:desc",
+      "@type": "xsd:string"
+    },
+    "MarketVO": "xt:MarketVO",
+    "eventTime": {
+      "@id": "xt:eventTime",
+      "@type": "xsd:integer"
+    },
+    "rate": {
+      "@id": "xt:rate",
+      "@type": "xsd:decimal"
+    },
+    "status": {
+      "@id": "xt:status",
+      "@type": "xsd:string"
+    },
+    "ModelAndView": "xt:ModelAndView",
+    "empty": {
+      "@id": "xt:empty",
+      "@type": "xsd:boolean"
+    },
+    "model": {
+      "@id": "xt:model"
+    },
+    "modelMap": {
+      "@id": "xt:modelMap"
+    },
+    "reference": {
+      "@id": "xt:reference",
+      "@type": "xsd:boolean"
+    },
+    "view": {
+      "@id": "xt:view",
+      "@type": "@id"
+    },
+    "viewName": {
+      "@id": "xt:viewName",
+      "@type": "xsd:string"
+    },
+    "MongoPageResult«FundRateRecordVO»": "xt:MongoPageResult«FundRateRecordVO»",
+    "hasNext": {
+      "@id": "xt:hasNext",
+      "@type": "xsd:boolean"
+    },
+    "hasPrev": {
+      "@id": "xt:hasPrev",
+      "@type": "xsd:boolean"
+    },
+    "items": {
+      "@id": "xt:items",
+      "@container": "@list"
+    },
+    "MongoPageResult«RiskBalanceVO»": "xt:MongoPageResult«RiskBalanceVO»",
+    "OpenInterestVO": "xt:OpenInterestVO",
+    "openInterest": {
+      "@id": "xt:openInterest",
+      "@type": "xsd:decimal"
+    },
+    "openInterestUsd": {
+      "@id": "xt:openInterestUsd",
+      "@type": "xsd:decimal"
+    },
+    "time": {
+      "@id": "xt:time",
+      "@type": "xsd:integer"
+    },
+    "OpenPriceVO": "xt:OpenPriceVO",
+    "openPrice": {
+      "@id": "xt:openPrice",
+      "@type": "xsd:decimal"
+    },
+    "OrderBookVO": "xt:OrderBookVO",
+    "asks": {
+      "@id": "xt:asks",
+      "@container": "@list"
+    },
+    "bids": {
+      "@id": "xt:bids",
+      "@container": "@list"
+    },
+    "PageResult«MMTradeVO»": "xt:PageResult«MMTradeVO»",
+    "page": {
+      "@id": "xt:page",
+      "@type": "xsd:integer"
+    },
+    "ps": {
+      "@id": "xt:ps",
+      "@type": "xsd:integer"
+    },
+    "total": {
+      "@id": "xt:total",
+      "@type": "xsd:integer"
+    },
+    "PageResult«MarketVO»": "xt:PageResult«MarketVO»",
+    "PlateVO": "xt:PlateVO",
+    "plate": {
+      "@id": "xt:plate",
+      "@type": "xsd:string"
+    },
+    "symbolSortRule": {
+      "@id": "xt:symbolSortRule",
+      "@type": "xsd:integer"
+    },
+    "PriceVO": "xt:PriceVO",
+    "RiskBalanceVO": "xt:RiskBalanceVO",
+    "amount": {
+      "@id": "xt:amount",
+      "@type": "xsd:decimal"
+    },
+    "SymbolBracketCacheDTO": "xt:SymbolBracketCacheDTO",
+    "leverageBrackets": {
+      "@id": "xt:leverageBrackets",
+      "@container": "@list"
+    },
+    "SymbolBracketVO": "xt:SymbolBracketVO",
+    "SymbolCacheDTO": "xt:SymbolCacheDTO",
+    "baseCoinDisplayPrecision": {
+      "@id": "xt:baseCoinDisplayPrecision",
+      "@type": "xsd:integer"
+    },
+    "baseCoinPrecision": {
+      "@id": "xt:baseCoinPrecision",
+      "@type": "xsd:integer"
+    },
+    "cnDesc": {
+      "@id": "xt:cnDesc",
+      "@type": "xsd:string"
+    },
+    "cnRemark": {
+      "@id": "xt:cnRemark",
+      "@type": "xsd:string"
+    },
+    "curMaxLeverage": {
+      "@id": "xt:curMaxLeverage",
+      "@type": "xsd:integer"
+    },
+    "deliveryCompletion": {
+      "@id": "xt:deliveryCompletion",
+      "@type": "xsd:boolean"
+    },
+    "depthPrecisionMerge": {
+      "@id": "xt:depthPrecisionMerge",
+      "@type": "xsd:integer"
+    },
+    "displaySwitch": {
+      "@id": "xt:displaySwitch",
+      "@type": "xsd:boolean"
+    },
+    "enRemark": {
+      "@id": "xt:enRemark",
+      "@type": "xsd:string"
+    },
+    "fastTrackCallbackRate1": {
+      "@id": "xt:fastTrackCallbackRate1",
+      "@type": "xsd:decimal"
+    },
+    "fastTrackCallbackRate2": {
+      "@id": "xt:fastTrackCallbackRate2",
+      "@type": "xsd:decimal"
+    },
+    "initLeverage": {
+      "@id": "xt:initLeverage",
+      "@type": "xsd:integer"
+    },
+    "initPositionType": {
+      "@id": "xt:initPositionType",
+      "@type": "xsd:string"
+    },
+    "labels": {
+      "@id": "xt:labels",
+      "@container": "@list"
+    },
+    "latestPriceDeviation": {
+      "@id": "xt:latestPriceDeviation",
+      "@type": "xsd:decimal"
+    },
+    "liquidationFee": {
+      "@id": "xt:liquidationFee",
+      "@type": "xsd:decimal"
+    },
+    "makerFee": {
+      "@id": "xt:makerFee",
+      "@type": "xsd:decimal"
+    },
+    "marketCloseTakeBound": {
+      "@id": "xt:marketCloseTakeBound",
+      "@type": "xsd:decimal"
+    },
+    "marketOpenTakeBound": {
+      "@id": "xt:marketOpenTakeBound",
+      "@type": "xsd:decimal"
+    },
+    "marketTakeBound": {
+      "@id": "xt:marketTakeBound",
+      "@type": "xsd:decimal"
+    },
+    "maxEntrusts": {
+      "@id": "xt:maxEntrusts",
+      "@type": "xsd:integer"
+    },
+    "maxNotional": {
+      "@id": "xt:maxNotional",
+      "@type": "xsd:decimal"
+    },
+    "maxOpenOrders": {
+      "@id": "xt:maxOpenOrders",
+      "@type": "xsd:integer"
+    },
+    "maxPrice": {
+      "@id": "xt:maxPrice",
+      "@type": "xsd:decimal"
+    },
+    "maxTrackCallbackRate": {
+      "@id": "xt:maxTrackCallbackRate",
+      "@type": "xsd:decimal"
+    },
+    "minNotional": {
+      "@id": "xt:minNotional",
+      "@type": "xsd:decimal"
+    },
+    "minPrice": {
+      "@id": "xt:minPrice",
+      "@type": "xsd:decimal"
+    },
+    "minQty": {
+      "@id": "xt:minQty",
+      "@type": "xsd:decimal"
+    },
+    "minTrackCallbackRate": {
+      "@id": "xt:minTrackCallbackRate",
+      "@type": "xsd:decimal"
+    },
+    "multiplierDown": {
+      "@id": "xt:multiplierDown",
+      "@type": "xsd:decimal"
+    },
+    "multiplierUp": {
+      "@id": "xt:multiplierUp",
+      "@type": "xsd:decimal"
+    },
+    "nextOpenTime": {
+      "@id": "xt:nextOpenTime",
+      "@type": "xsd:integer"
+    },
+    "offTime": {
+      "@id": "xt:offTime",
+      "@type": "xsd:dateTime"
+    },
+    "openSwitch": {
+      "@id": "xt:openSwitch",
+      "@type": "xsd:boolean"
+    },
+    "plates": {
+      "@id": "xt:plates",
+      "@container": "@list"
+    },
+    "predictEventParam": {
+      "@id": "xt:predictEventParam",
+      "@type": "xsd:string"
+    },
+    "predictEventSort": {
+      "@id": "xt:predictEventSort",
+      "@type": "xsd:string"
+    },
+    "predictEventType": {
+      "@id": "xt:predictEventType",
+      "@type": "xsd:string"
+    },
+    "quantityPrecision": {
+      "@id": "xt:quantityPrecision",
+      "@type": "xsd:integer"
+    },
+    "quoteCoinDisplayPrecision": {
+      "@id": "xt:quoteCoinDisplayPrecision",
+      "@type": "xsd:integer"
+    },
+    "quoteCoinPrecision": {
+      "@id": "xt:quoteCoinPrecision",
+      "@type": "xsd:integer"
+    },
+    "riskExpireTime": {
+      "@id": "xt:riskExpireTime",
+      "@type": "xsd:integer"
+    },
+    "riskNominalValueCoefficient": {
+      "@id": "xt:riskNominalValueCoefficient",
+      "@type": "xsd:decimal"
+    },
+    "supportEntrustType": {
+      "@id": "xt:supportEntrustType",
+      "@type": "xsd:string"
+    },
+    "supportOrderType": {
+      "@id": "xt:supportOrderType",
+      "@type": "xsd:string"
+    },
+    "supportPositionType": {
+      "@id": "xt:supportPositionType",
+      "@type": "xsd:string"
+    },
+    "supportTimeInForce": {
+      "@id": "xt:supportTimeInForce",
+      "@type": "xsd:string"
+    },
+    "takerFee": {
+      "@id": "xt:takerFee",
+      "@type": "xsd:decimal"
+    },
+    "updatedTime": {
+      "@id": "xt:updatedTime",
+      "@type": "xsd:dateTime"
+    },
+    "SymbolListDTO": "xt:SymbolListDTO",
+    "symbols": {
+      "@id": "xt:symbols",
+      "@container": "@list"
+    },
+    "version": {
+      "@id": "xt:version",
+      "@type": "xsd:string"
+    },
+    "TickerBookVO": "xt:TickerBookVO",
+    "aq": {
+      "@id": "xt:aq",
+      "@type": "xsd:string"
+    },
+    "bq": {
+      "@id": "xt:bq",
+      "@type": "xsd:string"
+    },
+    "TickerVO": "xt:TickerVO",
+    "TradeStatsVO": "xt:TradeStatsVO",
+    "openPositionValue": {
+      "@id": "xt:openPositionValue",
+      "@type": "xsd:decimal"
+    },
+    "tradeDataValue": {
+      "@id": "xt:tradeDataValue",
+      "@type": "xsd:decimal"
+    },
+    "View": "xt:View",
+    "contentType": {
+      "@id": "xt:contentType",
+      "@type": "xsd:string"
+    },
+    "AccountFunVO": "xt:AccountFunVO",
+    "accountId": {
+      "@id": "xt:accountId",
+      "@type": "xsd:integer"
+    },
+    "bonus": {
+      "@id": "xt:bonus",
+      "@type": "xsd:decimal"
+    },
+    "convertBtcAmount": {
+      "@id": "xt:convertBtcAmount",
+      "@type": "xsd:decimal"
+    },
+    "convertUsdtAmount": {
+      "@id": "xt:convertUsdtAmount",
+      "@type": "xsd:decimal"
+    },
+    "coupon": {
+      "@id": "xt:coupon",
+      "@type": "xsd:decimal"
+    },
+    "crossedMargin": {
+      "@id": "xt:crossedMargin",
+      "@type": "xsd:decimal"
+    },
+    "depositCoupon": {
+      "@id": "xt:depositCoupon",
+      "@type": "xsd:decimal"
+    },
+    "isolatedMargin": {
+      "@id": "xt:isolatedMargin",
+      "@type": "xsd:decimal"
+    },
+    "marginBalance": {
+      "@id": "xt:marginBalance",
+      "@type": "xsd:decimal"
+    },
+    "notProfit": {
+      "@id": "xt:notProfit",
+      "@type": "xsd:decimal"
+    },
+    "openOrderFeeFrozen": {
+      "@id": "xt:openOrderFeeFrozen",
+      "@type": "xsd:decimal"
+    },
+    "openOrderMarginFrozen": {
+      "@id": "xt:openOrderMarginFrozen",
+      "@type": "xsd:decimal"
+    },
+    "profit": {
+      "@id": "xt:profit",
+      "@type": "xsd:decimal"
+    },
+    "totalAmount": {
+      "@id": "xt:totalAmount",
+      "@type": "xsd:decimal"
+    },
+    "walletBalance": {
+      "@id": "xt:walletBalance",
+      "@type": "xsd:decimal"
+    },
+    "AccountInfoVO": "xt:AccountInfoVO",
+    "allowOpenPosition": {
+      "@id": "xt:allowOpenPosition",
+      "@type": "xsd:boolean"
+    },
+    "allowTrade": {
+      "@id": "xt:allowTrade",
+      "@type": "xsd:boolean"
+    },
+    "allowTransfer": {
+      "@id": "xt:allowTransfer",
+      "@type": "xsd:boolean"
+    },
+    "openTime": {
+      "@id": "xt:openTime",
+      "@type": "xsd:dateTime"
+    },
+    "userGroupId": {
+      "@id": "xt:userGroupId",
+      "@type": "xsd:integer"
+    },
+    "AmountDTO": "xt:AmountDTO",
+    "AutoDeleverageHistoryVO": "xt:AutoDeleverageHistoryVO",
+    "realizedProfit": {
+      "@id": "xt:realizedProfit",
+      "@type": "xsd:decimal"
+    },
+    "welfareAccount": {
+      "@id": "xt:welfareAccount",
+      "@type": "xsd:boolean"
+    },
+    "BalanceBillVO": "xt:BalanceBillVO",
+    "afterAmount": {
+      "@id": "xt:afterAmount",
+      "@type": "xsd:decimal"
+    },
+    "bonusDisRate": {
+      "@id": "xt:bonusDisRate",
+      "@type": "xsd:decimal"
+    },
+    "side": {
+      "@id": "xt:side",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "xt:type",
+      "@type": "xsd:string"
+    },
+    "BalanceConvertVO": "xt:BalanceConvertVO",
+    "convert": {
+      "@id": "xt:convert",
+      "@type": "xsd:decimal"
+    },
+    "usdtConvert": {
+      "@id": "xt:usdtConvert",
+      "@type": "xsd:decimal"
+    },
+    "BalanceVO": "xt:BalanceVO",
+    "availableBalance": {
+      "@id": "xt:availableBalance",
+      "@type": "xsd:decimal"
+    },
+    "BonusDetailVO": "xt:BonusDetailVO",
+    "bizId": {
+      "@id": "xt:bizId",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "xt:currency",
+      "@type": "xsd:string"
+    },
+    "currencyId": {
+      "@id": "xt:currencyId",
+      "@type": "xsd:integer"
+    },
+    "disRate": {
+      "@id": "xt:disRate",
+      "@type": "xsd:decimal"
+    },
+    "expireTime": {
+      "@id": "xt:expireTime",
+      "@type": "xsd:integer"
+    },
+    "recAmount": {
+      "@id": "xt:recAmount",
+      "@type": "xsd:decimal"
+    },
+    "useAmount": {
+      "@id": "xt:useAmount",
+      "@type": "xsd:decimal"
+    },
+    "CoinVO": "xt:CoinVO",
+    "allowTransferIn": {
+      "@id": "xt:allowTransferIn",
+      "@type": "xsd:boolean"
+    },
+    "allowTransferOut": {
+      "@id": "xt:allowTransferOut",
+      "@type": "xsd:boolean"
+    },
+    "isOpen": {
+      "@id": "xt:isOpen",
+      "@type": "xsd:boolean"
+    },
+    "CommonResponse«AccountFunVO»": "xt:CommonResponse«AccountFunVO»",
+    "CommonResponse«AccountInfoVO»": "xt:CommonResponse«AccountInfoVO»",
+    "CommonResponse«BalanceVO»": "xt:CommonResponse«BalanceVO»",
+    "CommonResponse«CoinVO»": "xt:CommonResponse«CoinVO»",
+    "CommonResponse«List«AccountFunVO»»": "xt:CommonResponse«List«AccountFunVO»»",
+    "CommonResponse«List«BalanceVO»»": "xt:CommonResponse«List«BalanceVO»»",
+    "CommonResponse«List«CoinVO»»": "xt:CommonResponse«List«CoinVO»»",
+    "CommonResponse«List«SatisfactionFeedbackTypeDTO»»": "xt:CommonResponse«List«SatisfactionFeedbackTypeDTO»»",
+    "CommonResponse«List«ShareTemplateVO»»": "xt:CommonResponse«List«ShareTemplateVO»»",
+    "CommonResponse«List«SmartMoneySubAccountVO»»": "xt:CommonResponse«List«SmartMoneySubAccountVO»»",
+    "CommonResponse«List«StepRateDTO»»": "xt:CommonResponse«List«StepRateDTO»»",
+    "CommonResponse«List«SymbolCompatVO»»": "xt:CommonResponse«List«SymbolCompatVO»»",
+    "CommonResponse«List«UserTradeVolumeVO»»": "xt:CommonResponse«List«UserTradeVolumeVO»»",
+    "CommonResponse«List«WelfareCoupon»»": "xt:CommonResponse«List«WelfareCoupon»»",
+    "CommonResponse«MongoPageResult«AutoDeleverageHistoryVO»»": "xt:CommonResponse«MongoPageResult«AutoDeleverageHistoryVO»»",
+    "CommonResponse«MongoPageResult«BalanceBillVO»»": "xt:CommonResponse«MongoPageResult«BalanceBillVO»»",
+    "CommonResponse«MongoPageResult«BonusDetailVO»»": "xt:CommonResponse«MongoPageResult«BonusDetailVO»»",
+    "CommonResponse«MongoPageResult«DepositCouponDetailVO»»": "xt:CommonResponse«MongoPageResult«DepositCouponDetailVO»»",
+    "CommonResponse«MongoPageResult«FundRateRecordDetailVO»»": "xt:CommonResponse«MongoPageResult«FundRateRecordDetailVO»»",
+    "CommonResponse«MongoPageResult«TakerOverVO»»": "xt:CommonResponse«MongoPageResult«TakerOverVO»»",
+    "CommonResponse«PageResult«CouponRecordVO»»": "xt:CommonResponse«PageResult«CouponRecordVO»»",
+    "CommonResponse«PageResult«OrderTradeVO»»": "xt:CommonResponse«PageResult«OrderTradeVO»»",
+    "CommonResponse«PageResult«SMPositionHistoryVO»»": "xt:CommonResponse«PageResult«SMPositionHistoryVO»»",
+    "CommonResponse«PageResult«SMPositionVO»»": "xt:CommonResponse«PageResult«SMPositionVO»»",
+    "CommonResponse«PageResult«TopTraderVO»»": "xt:CommonResponse«PageResult«TopTraderVO»»",
+    "CommonResponse«PageResult«UserRecentTradeDTO»»": "xt:CommonResponse«PageResult«UserRecentTradeDTO»»",
+    "CommonResponse«TopTraderCumulativeVO»": "xt:CommonResponse«TopTraderCumulativeVO»",
+    "CommonResponse«TopTraderInfoVO»": "xt:CommonResponse«TopTraderInfoVO»",
+    "CommonResponse«TraderInfoSelfVO»": "xt:CommonResponse«TraderInfoSelfVO»",
+    "CommonResponse«UploadUrlDTO»": "xt:CommonResponse«UploadUrlDTO»",
+    "CommonResponse«UserStepApplyResultDTO»": "xt:CommonResponse«UserStepApplyResultDTO»"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "XT.COM API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects XT.COM's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-13) from openapi/xt-com-futures-market-openapi.yml, openapi/xt-com-futures-user-openapi.yml.",
+  "dcterms:created": "2026-10-13",
+  "dcterms:source": [
+    "openapi/xt-com-futures-market-openapi.yml",
+    "openapi/xt-com-futures-user-openapi.yml"
+  ]
+}

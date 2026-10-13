@@ -1,0 +1,59 @@
+generated: '2026-10-13'
+method: searched
+status: published
+source: https://github.com/XtApis/AItradekit
+description: XT.COM publishes XT TradeKit (github.com/XtApis/AItradekit, the XtApis org linked from doc.xt.com),
+  a local Python MCP server run over stdio plus seven agent skills. No hosted/remote MCP endpoint was found; support.xt.com/mcp
+  answers 401 for any request including a control path and is the Zendesk help-center host, not an XT agent surface.
+  Tool names read from mcp/server.py.
+deployment:
+  mode: local-stdio
+  install: npx skills add XtApis/AItradekit  (then the xt-tradekit-setup skill installs the stdio server); or bash
+    install.sh
+  package: https://github.com/XtApis/AItradekit
+  auth: api-key
+  verified: searched
+local:
+  name: xt-tradekit
+  transport: stdio
+  source: https://github.com/XtApis/AItradekit/blob/main/mcp/server.py
+tools:
+- name: xt_spot_ticker
+- name: xt_spot_top_movers
+- name: xt_spot_depth
+- name: xt_spot_klines
+- name: xt_spot_symbol_info
+- name: xt_futures_ticker
+- name: xt_futures_depth
+- name: xt_futures_klines
+- name: xt_futures_funding_rate
+- name: xt_futures_funding_rate_history
+- name: xt_futures_contract_info
+- name: market_open_interest
+- name: market_long_short_ratio
+- name: market_taker_volume
+- name: market_recent_liquidations
+- name: market_fear_greed
+- name: market_global_overview
+- name: market_coin_profile
+- name: market_token_security
+- name: xt_announcements
+- name: xt_announcement_search
+- name: market_news
+- name: market_sentiment_snapshot
+- name: xt_credentials_status
+- name: xt_spot_balances
+- name: xt_spot_open_orders
+- name: xt_spot_order_history
+- name: xt_spot_place_order
+- name: xt_spot_cancel_order
+- name: xt_spot_cancel_all_orders
+- name: xt_currency_chains
+- name: xt_asset_transfer
+- name: xt_withdraw
+- name: xt_futures_account
+- name: xt_futures_positions
+- name: xt_futures_open_orders
+- name: xt_futures_place_order
+- name: xt_futures_cancel_order
+- name: xt_futures_order_history

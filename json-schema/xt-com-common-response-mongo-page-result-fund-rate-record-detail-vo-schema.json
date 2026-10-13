@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/xt-com/main/json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-detail-vo-schema.json",
+  "title": "CommonResponse«MongoPageResult«FundRateRecordDetailVO»»",
+  "x-generated": "2026-10-13",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/xt-com-futures-user-openapi.yml#/components/schemas/CommonResponse«MongoPageResult«FundRateRecordDetailVO»»",
+  "type": "object",
+  "properties": {
+    "error": {
+      "$ref": "#/$defs/ErrorMessage"
+    },
+    "msgInfo": {
+      "type": "string"
+    },
+    "result": {
+      "$ref": "#/$defs/MongoPageResult«FundRateRecordDetailVO»"
+    },
+    "returnCode": {
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  "$defs": {
+    "ErrorMessage": {
+      "title": "ErrorMessage",
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "code": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "FundRateRecordDetailVO": {
+      "title": "FundRateRecordDetailVO",
+      "type": "object",
+      "properties": {
+        "cast": {
+          "type": "number",
+          "description": "资金费用",
+          "format": "bigdecimal"
+        },
+        "coin": {
+          "type": "string",
+          "description": "币种"
+        },
+        "createdTime": {
+          "type": "integer",
+          "description": "时间",
+          "format": "int64"
+        },
+        "id": {
+          "type": "integer",
+          "description": "id",
+          "format": "int64"
+        },
+        "positionSide": {
+          "type": "string",
+          "description": "方向"
+        },
+        "symbol": {
+          "type": "string",
+          "description": "交易对"
+        }
+      }
+    },
+    "MongoPageResult«FundRateRecordDetailVO»": {
+      "title": "MongoPageResult«FundRateRecordDetailVO»",
+      "type": "object",
+      "properties": {
+        "hasNext": {
+          "type": "boolean",
+          "description": "是否有下一页"
+        },
+        "hasPrev": {
+          "type": "boolean",
+          "description": "是否有上一页"
+        },
+        "items": {
+          "type": "array",
+          "description": "数据列表",
+          "items": {
+            "$ref": "#/$defs/FundRateRecordDetailVO"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+generated: '2026-10-13'
+method: searched
+source: https://github.com/XtApis/xt-api/blob/main/docs/futures/Access%20Description/errorCode.mdx
+format: custom
+envelope: '{returnCode, msgInfo, error, result} (futures); {rc, mc, ma, result} (spot)'
+problems:
+- status: 200
+  title: OK
+  description: API called successfully (function execution may still fail)
+- status: 400
+  title: BAD_REQUEST
+  description: The request URL contains blacklisted keywords, or missing `validate-appkey`
+    / `validate-timestamp` headers
+- status: 403
+  title: FORBIDDEN
+  description: Host invalid, tenant disabled, time window expired, IP not in whitelist,
+    signature verification failed, or AppKey unauthorized
+- status: 405
+  title: METHOD_NOT_ALLOWED
+  description: Host header is null
+- status: 429
+  title: TOO_MANY_REQUESTS
+  description: Rate limit exceeded
+- status: 500
+  title: INTERNAL_SERVER_ERROR
+  description: Client IP missing, domain not found, or tenant domain info unavailable
+- status: 502
+  title: BAD_GATEWAY
+  description: Unknown error occurred
+- status: 503
+  title: SERVICE_UNAVAILABLE
+  description: Downstream service not found or temporarily unavailable

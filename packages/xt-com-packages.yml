@@ -1,0 +1,20 @@
+generated: '2026-10-13'
+method: searched
+source: https://pypi.org/pypi/pyxt/json
+packages:
+- name: pyxt
+  registry: pypi
+  url: https://pypi.org/project/pyxt/
+  language: python
+  official: true
+  version: 0.6.24
+  published: '2024-11-20'
+  note: author_email xt@xt.com; repo github.com/xt-com/pyxt (fork of xtexchange-py/pyxt)
+- name: XtApis/AItradekit
+  registry: github
+  url: https://github.com/XtApis/AItradekit
+  language: python
+  official: true
+  version: null
+  published: '2026-07-17'
+  note: local MCP server + skills; no registry release, date is last push

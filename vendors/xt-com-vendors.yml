@@ -1,0 +1,55 @@
+generated: '2026-10-13'
+method: probed
+source: pre-flight dossier (docs platform, portal detections) + CNAME chains and response headers of the hosts apis.yml names
+registry: all/0-working/vendors.yml
+areas_vocabulary:
+- documentation
+- developer-portal
+- api-gateway
+- cdn
+- hosting
+- sdk-generation
+- api-collections
+- status-page
+- support
+- community
+- identity
+- mcp-hosting
+vendors:
+- vendor: cloudfront
+  name: Amazon CloudFront
+  area: cdn
+  host: www.xt.com
+  evidence: cname:cloudfront.net
+  signal: cname
+  confidence: high
+  kin_score: []
+- vendor: zendesk
+  name: Zendesk
+  area: support
+  host: support.xt.com
+  evidence: cname:zendesk.com
+  signal: cname
+  confidence: high
+  kin_score:
+  - support_channel
+reliance:
+  areas_vendor_served:
+  - cdn
+  - support
+  vendor_count: 2
+  areas_observed: 12
+  share_of_observable_areas: 0.167
+  note: areas where a third party was DETECTED serving this provider; an area absent here was either self-run or not observed, and this script
+    cannot tell those apart
+checked:
+- 'docs-platform: no-docs-host'
+- www.xt.com (Website)
+- doc.xt.com (DeveloperPortal)
+- doc.xt.com (Documentation)
+- doc.xt.com (GettingStarted)
+- www.xt.com (SignUp)
+- www.xt.com (Login)
+- support.xt.com (Support)
+- fapi.xt.com (baseURL)
+- sapi.xt.com (baseURL)
