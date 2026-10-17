@@ -1,0 +1,40 @@
+{
+  "provider": "xt-com",
+  "sources": [
+    "_original/xt-com-biz-quotation.yml",
+    "_original/xt-com-biz-user.yml",
+    "xt-com-futures-market-openapi.yml",
+    "xt-com-futures-user-openapi.yml"
+  ],
+  "outputs": [
+    "xt-com-basic-error-controller-api-openapi.yml",
+    "xt-com-default-api-openapi.yml",
+    "xt-com-v2-api-openapi.yml",
+    "xt-com-v3-api-openapi.yml",
+    "xt-com-listenkey-api-openapi.yml",
+    "xt-com-symbol-controller-api-openapi.yml",
+    "xt-com-order-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/xt-com-futures-market-openapi.yml",
+    "archived openapi/xt-com-futures-user-openapi.yml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "xt-com-biz-quotation.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0; renamed 43 component key(s) illegal in 3.x (e.g. CommonResponse\u00abAggTickerVO\u00bb)",
+    "xt-com-biz-user.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0; renamed 58 component key(s) illegal in 3.x (e.g. CommonResponse\u00abAccountFunVO\u00bb)",
+    "xt-com-futures-market-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0; renamed 43 component key(s) illegal in 3.x (e.g. CommonResponse\u00abAggTickerVO\u00bb)",
+    "xt-com-futures-user-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0; renamed 58 component key(s) illegal in 3.x (e.g. CommonResponse\u00abAccountFunVO\u00bb)",
+    "tag 'basic-error-controller' spans 4 source specs (xt-com-biz-quotation.yml, xt-com-biz-user.yml, xt-com-futures-market-openapi.yml, xt-com-futures-user-openapi.yml): per-path servers applied",
+    "tag '\u5408\u7ea6\u4fe1\u606f' spans 4 source specs (xt-com-biz-quotation.yml, xt-com-biz-user.yml, xt-com-futures-market-openapi.yml, xt-com-futures-user-openapi.yml): per-path servers applied",
+    "tag '\u83b7\u53d6\u4ea4\u6613\u5bf9\u914d\u7f6e\u4fe1\u606f(v2)' spans 2 source specs (xt-com-biz-quotation.yml, xt-com-futures-market-openapi.yml): per-path servers applied",
+    "tag '\u83b7\u53d6\u4ea4\u6613\u5bf9\u914d\u7f6e\u4fe1\u606f(v3)' spans 2 source specs (xt-com-biz-quotation.yml, xt-com-futures-market-openapi.yml): per-path servers applied",
+    "tag 'listenKey' spans 2 source specs (xt-com-biz-user.yml, xt-com-futures-user-openapi.yml): per-path servers applied",
+    "tag 'symbol-controller' spans 2 source specs (xt-com-biz-user.yml, xt-com-futures-user-openapi.yml): per-path servers applied",
+    "tag '\u5408\u7ea6\u806a\u660e\u94b1-order' spans 2 source specs (xt-com-biz-user.yml, xt-com-futures-user-openapi.yml): per-path servers applied",
+    "apis.yml register: written (+7 apis, 9 total)"
+  ],
+  "skipped": []
+}

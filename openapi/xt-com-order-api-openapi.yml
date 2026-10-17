@@ -1,0 +1,966 @@
+openapi: 3.2.0
+info:
+  title: Xt Com 合约聪明钱 Order API
+  version: '1.0'
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: urn:tos
+  description: 'Operations tagged 合约聪明钱-order across 2 of this provider''s published API definitions: xt-com-biz-user.yml, xt-com-futures-user-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://fapi.xt.com
+  description: Inferred Url
+tags:
+- name: 合约聪明钱-order
+  description: Smart Money Order Controller
+paths:
+  /v1/smartMoney/public/list-history:
+    get:
+      tags:
+      - 合约聪明钱-order
+      summary: 查询历史仓位
+      operationId: listHistoryUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: 账户id
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: direction
+        in: query
+        description: 方向,default:NEXT:下一页;PREVIOUS:上一页
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: query
+        description: id,排序ID，用于翻页
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: isFullClose
+        in: query
+        description: 仓位模式：0部分平仓 1全部平仓 不传查询全部
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: 每页显示数量,default=10
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        description: 页码
+        required: false
+        style: form
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: positionType
+        in: query
+        description: 仓位模式：1全仓、2逐仓 不传查询全部
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        description: 单页数
+        required: false
+        style: form
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+      - name: startTime
+        in: query
+        description: 起始时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_SMPositionHistoryVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/public/list/active:
+    get:
+      tags:
+      - 合约聪明钱-order
+      summary: 获取当前持仓信息
+      operationId: getActivePositionUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: 交易员accountId
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: isDelivery
+        in: query
+        description: 是否查询交割
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        description: 页码
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        description: 单页数
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          maximum: 100
+          type: integer
+          format: int32
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      - name: gateway
+        in: header
+        description: gateway
+        required: true
+        schema:
+          type: string
+      - name: app-version-name
+        in: header
+        description: app-version-name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_SMPositionVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/public/trade-list:
+    get:
+      tags:
+      - 合约聪明钱-order
+      summary: 查询成交明细
+      operationId: getTradeListUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: accountId
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: orderId
+        in: query
+        description: 订单Id
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        description: 页码
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        description: 单页数
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          maximum: 100
+          type: integer
+          format: int32
+      - name: startTime
+        in: query
+        description: 开始时间
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_OrderTradeVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/self/list-history:
+    get:
+      tags:
+      - 合约聪明钱-order
+      summary: 查询历史仓位【个人中心】
+      operationId: listHistoryForSelfUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: 账户id
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: direction
+        in: query
+        description: 方向,default:NEXT:下一页;PREVIOUS:上一页
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: query
+        description: id,排序ID，用于翻页
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: isFullClose
+        in: query
+        description: 仓位模式：0部分平仓 1全部平仓 不传查询全部
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: 每页显示数量,default=10
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: page
+        in: query
+        description: 页码
+        required: false
+        style: form
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: positionType
+        in: query
+        description: 仓位模式：1全仓、2逐仓 不传查询全部
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        description: 单页数
+        required: false
+        style: form
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+      - name: startTime
+        in: query
+        description: 起始时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_SMPositionHistoryVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/self/list/active:
+    get:
+      tags:
+      - 合约聪明钱-order
+      summary: 获取当前持仓信息【个人中心】
+      operationId: getActivePositionForSelfUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: accountId
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: isDelivery
+        in: query
+        description: 是否查询交割
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        description: 页码
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        description: 单页数
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          maximum: 100
+          type: integer
+          format: int32
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      - name: gateway
+        in: header
+        description: gateway
+        required: true
+        schema:
+          type: string
+      - name: app-version-name
+        in: header
+        description: app-version-name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_SMPositionVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/self/trade-list:
+    get:
+      tags:
+      - 合约聪明钱-order
+      summary: 查询成交明细【个人中心】
+      operationId: getTradeListForSelfUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: accountId
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: orderId
+        in: query
+        description: 订单Id
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        description: 页码
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        description: 单页数
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          maximum: 100
+          type: integer
+          format: int32
+      - name: startTime
+        in: query
+        description: 开始时间
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_OrderTradeVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+components:
+  schemas:
+    PageResult_OrderTradeVO:
+      title: PageResult«OrderTradeVO»
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderTradeVO'
+        page:
+          type: integer
+          format: int64
+        ps:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+    CommonResponse_PageResult_OrderTradeVO:
+      title: CommonResponse«PageResult«OrderTradeVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/PageResult_OrderTradeVO'
+        returnCode:
+          type: integer
+          format: int32
+    SMPositionVO:
+      title: SMPositionVO
+      type: object
+      properties:
+        accountId:
+          type: string
+        autoMargin:
+          type: boolean
+          description: 是否自动追加保证金
+          example: false
+        availableCloseSize:
+          type: number
+          description: 可平仓数量（张）
+          format: bigdecimal
+        closeOrderSize:
+          type: number
+          description: 平仓挂单数量（张）
+          format: bigdecimal
+        closeProfit:
+          type: number
+          description: 平仓盈亏
+          format: bigdecimal
+        contractSize:
+          type: number
+          description: 合约面值
+          format: bigdecimal
+        contractType:
+          type: string
+          description: 合约类型：PERPETUAL(永续合约)、PREDICT(预测合约)
+        entryPrice:
+          type: number
+          description: 开仓均价
+          format: bigdecimal
+        isolatedMargin:
+          type: number
+          description: 逐仓保证金
+          format: bigdecimal
+        leverage:
+          type: integer
+          description: 杠杆倍数
+          format: int32
+        markPrice:
+          type: number
+          description: 标记价
+          format: bigdecimal
+        openOrderMarginFrozen:
+          type: number
+          description: 开仓订单保证金占用
+          format: bigdecimal
+        openOrderSize:
+          type: number
+          description: 开仓订单占用
+          format: bigdecimal
+        positionSide:
+          type: string
+          description: 持仓方向
+        positionSize:
+          type: number
+          description: 持仓数量（张）
+          format: bigdecimal
+        positionType:
+          type: string
+          description: 仓位类型:CROSSED(全仓);ISOLATED(逐仓)
+        profitFixedCount:
+          type: integer
+          description: 部分仓位止盈止损总数
+          format: int32
+        profitFixedLatest:
+          description: 最新设置的部分仓位止盈止损
+          $ref: '#/components/schemas/ProfitFixedLatest'
+        profitId:
+          type: integer
+          description: 止盈止损id
+          format: int64
+        realizedProfit:
+          type: number
+          description: 已实现盈亏
+          format: bigdecimal
+        reverseEntrustId:
+          type: integer
+          description: 反手委托id
+          format: int64
+        reverseStopPrice:
+          type: number
+          description: 反手触发价格
+          format: bigdecimal
+        reverseTriggerPriceType:
+          type: string
+          description: 反手触发价格类型
+        symbol:
+          type: string
+          description: 交易对
+        totalFee:
+          type: number
+          description: 手续费
+          format: bigdecimal
+        totalFundFee:
+          type: number
+          description: 资金费用
+          format: bigdecimal
+        triggerPriceType:
+          type: string
+          description: 触发价格类型 1、指数价格 2：标记价格（合理价格）；3：最新价',
+        triggerProfitPrice:
+          type: number
+          description: 止盈触发价
+          format: bigdecimal
+        triggerStopPrice:
+          type: number
+          description: 止损触发价
+          format: bigdecimal
+        updatedTime:
+          type: integer
+          description: 更新时间
+          format: int64
+        welfareAccount:
+          type: boolean
+        welfareExpirationTime:
+          type: integer
+          description: 赠金券到期时间
+          format: int64
+    CommonResponse_PageResult_SMPositionHistoryVO:
+      title: CommonResponse«PageResult«SMPositionHistoryVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/PageResult_SMPositionHistoryVO'
+        returnCode:
+          type: integer
+          format: int32
+    ProfitFixedLatest:
+      title: ProfitFixedLatest
+      type: object
+      properties:
+        profitId:
+          type: integer
+          description: 止盈止损id
+          format: int64
+        triggerPriceType:
+          type: string
+          description: 触发价格类型 1、指数价格 2：标记价格（合理价格）；3：最新价',
+        triggerProfitPrice:
+          type: number
+          description: 止盈触发价
+          format: bigdecimal
+        triggerStopPrice:
+          type: number
+          description: 止损触发价
+          format: bigdecimal
+    OrderTradeVO:
+      title: OrderTradeVO
+      type: object
+      properties:
+        amount:
+          type: number
+          description: 成交金额
+          format: bigdecimal
+        baseCoin:
+          type: string
+          description: baseCoin
+        bonusDeductFee:
+          type: number
+          description: 手续费-体验金抵扣金额
+          format: bigdecimal
+        contractSize:
+          type: number
+          description: 合约面值
+          format: bigdecimal
+        contractType:
+          type: integer
+          description: "合约类型，永续，交割     PERPETUAL(1, \"perpetual\"),\n    CURRENT_MONTH(2, \"current month\"),\n    NEXT_MONTH(3, \"next month\"),\n    CURRENT_QUARTER(4, \"current quarter\"),\n    NEXT_QUARTER(5, \"next quarter\"),\n    PREDICT(6, \"predict\"),\n    CURRENT_WEEK(7, \"next quarter\"),\n    NEXT_WEEK(8, \"next quarter\");"
+          format: int32
+        couponDeductFee:
+          type: number
+          description: 手续费-抵扣金券抵扣金额
+          format: bigdecimal
+        execId:
+          type: integer
+          description: 成交id
+          format: int64
+        fee:
+          type: number
+          description: 手续费
+          format: bigdecimal
+        feeCoin:
+          type: string
+          description: 手续费币种
+        orderId:
+          type: integer
+          description: 订单id
+          format: int64
+        orderSide:
+          type: string
+          description: 买卖方向：BUY;SELL
+        positionSide:
+          type: string
+          description: 仓位方向：LONG;SHORT
+        price:
+          type: number
+          description: 成交价格
+          format: bigdecimal
+        quantity:
+          type: number
+          description: 成交数量
+          format: bigdecimal
+        symbol:
+          type: string
+          description: 交易对
+        takerMaker:
+          type: string
+          enum:
+          - MAKER
+          - TAKER
+        timestamp:
+          type: integer
+          description: 时间
+          format: int64
+        underlyingType:
+          type: integer
+          description: 标的类型，1:币本位合约；2:USDT本位合约(采用后台默认)
+          format: int32
+    PageResult_SMPositionHistoryVO:
+      title: PageResult«SMPositionHistoryVO»
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SMPositionHistoryVO'
+        page:
+          type: integer
+          format: int64
+        ps:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+    SMPositionHistoryVO:
+      title: SMPositionHistoryVO
+      type: object
+      properties:
+        closeOpenPrice:
+          type: number
+          description: 已平仓的开仓均价
+          format: bigdecimal
+        closePositionSize:
+          type: number
+          description: 平仓量
+          format: bigdecimal
+        closePrice:
+          type: number
+          description: 平仓均价
+          format: bigdecimal
+        closeProfit:
+          type: number
+          description: 已实现盈亏
+          format: bigdecimal
+        closeTime:
+          type: integer
+          description: 平仓时间
+          format: int64
+        contractType:
+          type: string
+          description: 合约类型：PERPETUAL(永续合约)、PREDICT(预测合约)
+        endLeverage:
+          type: integer
+          description: 平仓杠杠
+          format: int32
+        force:
+          type: boolean
+          description: 是否是强平仓位历史，true-是，false-不是
+          example: false
+        forceMarkPrice:
+          type: number
+          format: bigdecimal
+        id:
+          type: integer
+          format: int64
+        maxPositionSize:
+          type: number
+          description: 最大持仓量
+          format: bigdecimal
+        openTime:
+          type: integer
+          description: 开仓时间
+          format: int64
+        positionSide:
+          type: string
+          description: 持仓方向,LONG 多，SHORT 空
+        positionType:
+          type: string
+          description: 仓位类型:CROSSED(全仓);ISOLATED(逐仓)
+        startLeverage:
+          type: integer
+          description: 起始杠杠
+          format: int32
+        symbol:
+          type: string
+          description: 交易对
+        totalFee:
+          type: number
+          description: 手续费
+          format: bigdecimal
+        totalFundFee:
+          type: number
+          description: 资金费率
+          format: bigdecimal
+        welfareAccount:
+          type: boolean
+          description: 赠金标识符
+          example: false
+        working:
+          type: boolean
+    ErrorMessage:
+      title: ErrorMessage
+      type: object
+      properties:
+        args:
+          type: array
+          items:
+            type: object
+        code:
+          type: string
+        msg:
+          type: string
+    CommonResponse_PageResult_SMPositionVO:
+      title: CommonResponse«PageResult«SMPositionVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/PageResult_SMPositionVO'
+        returnCode:
+          type: integer
+          format: int32
+    PageResult_SMPositionVO:
+      title: PageResult«SMPositionVO»
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SMPositionVO'
+        page:
+          type: integer
+          format: int64
+        ps:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+x-refined-from:
+- xt-com-biz-user.yml
+- xt-com-futures-user-openapi.yml

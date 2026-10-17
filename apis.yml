@@ -82,22 +82,42 @@ common:
 - type: Support
   url: https://support.xt.com/hc/zh-cn
 apis:
-- aid: xt-com:futures-market-api
-  name: XT.COM Futures Market API
-  description: 'Public futures market data from XT.COM: contracts, tickers, depth, klines, funding rates, mark and index prices,
-    open interest and risk balances. Contract published by XT.COM in github.com/XtApis/xt-api (api-docs/en/contract/biz-quotation.yml);
-    live paths sit under the /future/market prefix on fapi.xt.com.'
+- aid: xt-com:spot-api
+  name: XT.COM Spot API
+  description: >-
+    XT.COM spot trading REST API (v4) for market data, orders, balances, deposits and withdrawals. Documented
+    at doc.xt.com/spot; no machine-readable contract is published for it.
+  humanURL: https://doc.xt.com/spot
+  baseURL: https://sapi.xt.com
+  tags:
+  - Spot
+  - Trading
+  properties:
+  - type: Documentation
+    url: https://doc.xt.com/spot
+- aid: xt-com:tradekit-mcp
+  name: XT TradeKit MCP Server
+  description: >-
+    Local stdio MCP server and agent skills published by XT.COM for market research and spot/futures trading
+    from AI assistants.
+  humanURL: https://github.com/XtApis/AItradekit
+  baseURL: https://sapi.xt.com
+  tags:
+  - MCP
+  - Agents
+  properties:
+  - type: MCPServer
+    url: mcp/xt-com-mcp.yml
+- aid: xt-com:xt-com-basic-error-controller-api
+  name: XT.COM Basic Error Controller API
+  description: Basic Error Controller
   humanURL: https://doc.xt.com/futures
   baseURL: https://fapi.xt.com/future/market
   tags:
-  - Futures
-  - Market Data
+  - basic-error-controller
   properties:
   - type: OpenAPI
-    url: openapi/xt-com-futures-market-openapi.yml
-  - type: OpenAPI
-    name: OpenAPI (provider-hosted)
-    url: https://raw.githubusercontent.com/XtApis/xt-api/main/api-docs/en/contract/biz-quotation.yml
+    url: openapi/xt-com-basic-error-controller-api-openapi.yml
   - type: Documentation
     url: https://doc.xt.com/futures
   - type: JSONSchema
@@ -112,60 +132,255 @@ apis:
     url: json-schema/xt-com-common-response-list-event-future-config-vo-schema.json
   - type: JSONSchema
     url: json-schema/xt-com-common-response-mongo-page-result-risk-balance-vo-schema.json
-- aid: xt-com:futures-user-api
-  name: XT.COM Futures User API
-  description: 'Authenticated XT.COM futures account and trading API: account info, balances, positions, orders, entrust/plan
-    orders, leverage and transfer operations. Contract published by XT.COM in github.com/XtApis/xt-api (api-docs/en/user/biz-user.yml);
-    live paths sit under the /future/user prefix on fapi.xt.com.'
-  humanURL: https://doc.xt.com/futures
-  baseURL: https://fapi.xt.com/future/user
-  tags:
-  - Futures
-  - Trading
-  properties:
-  - type: OpenAPI
-    url: openapi/xt-com-futures-user-openapi.yml
-  - type: OpenAPI
-    name: OpenAPI (provider-hosted)
-    url: https://raw.githubusercontent.com/XtApis/xt-api/main/api-docs/en/user/biz-user.yml
-  - type: Documentation
-    url: https://doc.xt.com/futures
   - type: JSONSchema
     url: json-schema/xt-com-user-step-apply-dto-schema.json
   - type: JSONSchema
     url: json-schema/xt-com-user-collection-dto-schema.json
   - type: JSONSchema
-    url: json-schema/xt-com-common-response-mongo-page-result-auto-deleverage-history-vo-schema.json
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-auto-deleverage-history-vo-schema.json
   - type: JSONSchema
     url: json-schema/xt-com-common-response-list-satisfaction-feedback-type-dto-schema.json
   - type: JSONSchema
-    url: json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-detail-vo-schema.json
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-detail-vo-schema.json
   - type: JSONSchema
-    url: json-schema/xt-com-common-response-mongo-page-result-deposit-coupon-detail-vo-schema.json
-- aid: xt-com:spot-api
-  name: XT.COM Spot API
-  description: XT.COM spot trading REST API (v4) for market data, orders, balances, deposits and withdrawals. Documented at
-    doc.xt.com/spot; no machine-readable contract is published for it.
-  humanURL: https://doc.xt.com/spot
-  baseURL: https://sapi.xt.com
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-deposit-coupon-detail-vo-schema.json
+- aid: xt-com:xt-com-default-api
+  name: XT.COM 合约信息 API
+  description: Contract Info Controller
+  humanURL: https://doc.xt.com/futures
+  baseURL: https://fapi.xt.com/future/market
   tags:
-  - Spot
-  - Trading
+  - 合约信息
   properties:
+  - type: OpenAPI
+    url: openapi/xt-com-default-api-openapi.yml
   - type: Documentation
-    url: https://doc.xt.com/spot
-- aid: xt-com:tradekit-mcp
-  name: XT TradeKit MCP Server
-  description: Local stdio MCP server and agent skills published by XT.COM for market research and spot/futures trading from
-    AI assistants.
-  humanURL: https://github.com/XtApis/AItradekit
-  baseURL: https://sapi.xt.com
+    url: https://doc.xt.com/futures
+  - type: JSONSchema
+    url: json-schema/xt-com-contract-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-order-book-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-symbol-bracket-cache-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-event-future-config-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-risk-balance-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-step-apply-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-collection-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-auto-deleverage-history-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-satisfaction-feedback-type-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-detail-vo-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-deposit-coupon-detail-vo-schema.json
+- aid: xt-com:xt-com-listenkey-api
+  name: XT.COM Listen Key API
+  description: Listen Key Controller
+  humanURL: https://doc.xt.com/futures
+  baseURL: https://fapi.xt.com/future/market
   tags:
-  - MCP
-  - Agents
+  - listenKey
   properties:
-  - type: MCPServer
-    url: mcp/xt-com-mcp.yml
+  - type: OpenAPI
+    url: openapi/xt-com-listenkey-api-openapi.yml
+  - type: Documentation
+    url: https://doc.xt.com/futures
+  - type: JSONSchema
+    url: json-schema/xt-com-contract-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-order-book-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-symbol-bracket-cache-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-event-future-config-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-risk-balance-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-step-apply-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-collection-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-auto-deleverage-history-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-satisfaction-feedback-type-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-detail-vo-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-deposit-coupon-detail-vo-schema.json
+- aid: xt-com:xt-com-order-api
+  name: XT.COM 合约聪明钱 Order API
+  description: Smart Money Order Controller
+  humanURL: https://doc.xt.com/futures
+  baseURL: https://fapi.xt.com/future/market
+  tags:
+  - 合约聪明钱-order
+  properties:
+  - type: OpenAPI
+    url: openapi/xt-com-order-api-openapi.yml
+  - type: Documentation
+    url: https://doc.xt.com/futures
+  - type: JSONSchema
+    url: json-schema/xt-com-contract-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-order-book-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-symbol-bracket-cache-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-event-future-config-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-risk-balance-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-step-apply-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-collection-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-auto-deleverage-history-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-satisfaction-feedback-type-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-detail-vo-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-deposit-coupon-detail-vo-schema.json
+- aid: xt-com:xt-com-symbol-controller-api
+  name: XT.COM Symbol Controller API
+  description: Symbol Controller
+  humanURL: https://doc.xt.com/futures
+  baseURL: https://fapi.xt.com/future/market
+  tags:
+  - symbol-controller
+  properties:
+  - type: OpenAPI
+    url: openapi/xt-com-symbol-controller-api-openapi.yml
+  - type: Documentation
+    url: https://doc.xt.com/futures
+  - type: JSONSchema
+    url: json-schema/xt-com-contract-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-order-book-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-symbol-bracket-cache-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-event-future-config-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-risk-balance-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-step-apply-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-collection-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-auto-deleverage-history-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-satisfaction-feedback-type-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-detail-vo-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-deposit-coupon-detail-vo-schema.json
+- aid: xt-com:xt-com-v2-api
+  name: XT.COM 获取交易对配置信息(v2) API
+  description: Symbol V 2 Controller
+  humanURL: https://doc.xt.com/futures
+  baseURL: https://fapi.xt.com/future/market
+  tags:
+  - 获取交易对配置信息(v2)
+  properties:
+  - type: OpenAPI
+    url: openapi/xt-com-v2-api-openapi.yml
+  - type: Documentation
+    url: https://doc.xt.com/futures
+  - type: JSONSchema
+    url: json-schema/xt-com-contract-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-order-book-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-symbol-bracket-cache-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-event-future-config-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-risk-balance-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-step-apply-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-collection-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-auto-deleverage-history-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-satisfaction-feedback-type-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-detail-vo-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-deposit-coupon-detail-vo-schema.json
+- aid: xt-com:xt-com-v3-api
+  name: XT.COM 获取交易对配置信息(v3) API
+  description: Symbol V 3 Controller
+  humanURL: https://doc.xt.com/futures
+  baseURL: https://fapi.xt.com/future/market
+  tags:
+  - 获取交易对配置信息(v3)
+  properties:
+  - type: OpenAPI
+    url: openapi/xt-com-v3-api-openapi.yml
+  - type: Documentation
+    url: https://doc.xt.com/futures
+  - type: JSONSchema
+    url: json-schema/xt-com-contract-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-order-book-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-symbol-bracket-cache-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-event-future-config-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-mongo-page-result-risk-balance-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-step-apply-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-user-collection-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-auto-deleverage-history-vo-schema.json
+  - type: JSONSchema
+    url: json-schema/xt-com-common-response-list-satisfaction-feedback-type-dto-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-fund-rate-record-detail-vo-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/xt-com-common-response-mongo-page-result-deposit-coupon-detail-vo-schema.json
 x-enrichment:
   date: '2026-10-13'
   status: enriched

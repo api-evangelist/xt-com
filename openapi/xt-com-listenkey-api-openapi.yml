@@ -1,0 +1,69 @@
+openapi: 3.2.0
+info:
+  title: Xt Com Listen Key API
+  version: '1.0'
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: urn:tos
+  description: 'Operations tagged listenKey across 2 of this provider''s published API definitions: xt-com-biz-user.yml, xt-com-futures-user-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://fapi.xt.com
+  description: Inferred Url
+tags:
+- name: listenKey
+  description: Listen Key Controller
+paths:
+  /v1/user/listen-key:
+    get:
+      tags:
+      - listenKey
+      summary: 获取listenKey
+      operationId: getListenKeyUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_object'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+components:
+  schemas:
+    ErrorMessage:
+      title: ErrorMessage
+      type: object
+      properties:
+        args:
+          type: array
+          items:
+            type: object
+        code:
+          type: string
+        msg:
+          type: string
+    CommonResponse_object:
+      title: CommonResponse«object»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: object
+        returnCode:
+          type: integer
+          format: int32
+x-refined-from:
+- xt-com-biz-user.yml
+- xt-com-futures-user-openapi.yml

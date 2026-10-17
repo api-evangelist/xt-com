@@ -1,0 +1,7347 @@
+openapi: 3.2.0
+info:
+  title: Xt Com 合约信息 API
+  version: '1.0'
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: urn:tos
+  description: 'Operations tagged 合约信息 across 4 of this provider''s published API definitions: xt-com-biz-quotation.yml, xt-com-biz-user.yml, xt-com-futures-market-openapi.yml, xt-com-futures-user-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://fapi.xt.com
+  description: Inferred Url
+tags:
+- name: 合约信息
+  description: Contract Info Controller
+paths:
+  /v1/public/contract/open-interest:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取交易对仓位头寸
+      operationId: getOpenInterestUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: symbol
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_OpenInterestVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/contract/risk-balance:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取交易对风险基金余额
+      operationId: getRiskBalanceListUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: direction
+        in: query
+        description: 方向（PREV:上一页；NEXT:下一页）
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: id
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 条数
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: integer
+          format: int32
+      - name: symbol
+        in: query
+        description: 交易对
+        required: true
+        style: form
+        allowReserved: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_MongoPageResult_RiskBalanceVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/cg/contracts:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取合约信息
+      operationId: getContractsUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContractVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/cg/orderbook:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取交易对的深度信息
+      operationId: getDepthUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: level
+        in: query
+        description: 档位（min:1,max:200）
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int32
+      - name: symbol
+        in: query
+        description: 交易对,例如 BTC-USDT
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrderBookVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/market/category:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取异动分类
+      operationId: categoryUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_MarketCategoryVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/market/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取市场异动列表
+      operationId: listUsingGET
+      parameters:
+      - name: category
+        in: query
+        description: category
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        description: size
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_MarketVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/time:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取服务器时间
+      operationId: getServerTimeUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_long'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/leverage/bracket/detail:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询单个交易对杠杆分层
+      operationId: getBracketDetailUsingGET
+      parameters:
+      - name: symbol
+        in: query
+        description: symbol
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_SymbolBracketVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/leverage/bracket/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询所有交易对杠杆分层
+      operationId: getBracketListUsingGET_1
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_SymbolBracketCacheDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/event-future/limit:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取事件合约限制信息
+      operationId: getEventFutureLimitUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_EventFutureLimitInfoVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/event-future/list/detail:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取所事件合约配置信息
+      operationId: getEventFutureListUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_EventFutureConfigVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/symbol/all:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取所有交易对
+      operationId: getAllSymbolsUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_string'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/symbol/coin/detail:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取币种详情
+      operationId: getCoinDetailUsingGET
+      parameters:
+      - name: coin
+        in: query
+        description: 币种，多个币种用,隔开
+        required: false
+        style: form
+        explode: true
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_CoinDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/symbol/coins:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取交易对币种
+      operationId: getCoinListUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_string'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/symbol/detail:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取单个交易对的配置信息
+      operationId: getSymbolDetailUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: symbol
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_SymbolCacheDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/symbol/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取所有交易对的配置信息
+      operationId: getSymbolListUsingGET_3
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_SymbolCacheDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/plate/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取板块信息
+      operationId: getSymbolListUsingGET_2
+      parameters:
+      - name: isDelivery
+        in: query
+        description: isDelivery
+        required: false
+        style: form
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_PlateVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/merchant/q/trade-list:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询成交明细
+      operationId: getTradeListUsingGET
+      parameters:
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: orderId
+        in: query
+        description: 订单Id
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        description: 页码
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        description: 单页数
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          maximum: 500
+          type: integer
+          format: int32
+      - name: startTime
+        in: query
+        description: 开始时间
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_MMTradeVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/agg-ticker:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取指定交易对的聚合行情信息
+      operationId: getAggTickerUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: 交易对
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_AggTickerVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/agg-tickers:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取全交易对的聚合行情信息
+      operationId: getAggTickersUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_AggTickerVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/deal:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取交易对的最新成交信息
+      operationId: getDealsUsingGET_1
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: num
+        in: query
+        description: 数量
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: 交易对
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_DealVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/deliver-kline:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取交割合约的k线信息
+      operationId: getDeliverKlineUsingGET
+      parameters:
+      - name: contractType
+        in: query
+        description: 交割类型：CURRENT_MONTH,NEXT_MONTH,CURRENT_QUARTER,NEXT_QUARTER,CURRENT_WEEK,NEXT_WEEK
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: interval
+        in: query
+        description: 时间间隔支持1m，3m,5m,15m,30m,1h,2h,4h,6h,8h,12h,1d,2d,3d,1w,1M
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 限制条数
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          maximum: 1500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pair
+        in: query
+        description: 交易对pair
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        description: 起始时间
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_KlineDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/depth:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取交易对的深度信息
+      operationId: getDepthUsingGET_3
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: level
+        in: query
+        description: 档位（min:1,max:50）
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: symbol
+        in: query
+        description: 交易对
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_DepthVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/funding-rate:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取资金费率
+      operationId: getFundingRateUsingGET_1
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: symbol
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_FundRateDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/funding-rate-record:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取资金费率记录
+      operationId: getFundingRateRecordUsingGET_1
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: direction
+        in: query
+        description: 方向（PREV:上一页；NEXT:下一页）
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: id
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 条数
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: integer
+          format: int32
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_MongoPageResult_FundRateRecordVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/funding-rate-record-chart:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取资金费率图表
+      operationId: getFundingRateRecordChartUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: symbol
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        description: startTime
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: endTime
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_FundRateRecordVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/funding-rate-record-tool:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取资金费率工具记录
+      operationId: getFundingRateToolRecordUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: direction
+        in: query
+        description: 方向（PREV:上一页；NEXT:下一页）
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: id
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 条数
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: integer
+          format: int32
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        allowReserved: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_MongoPageResult_FundRateRecordVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/funding-rate-tool:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取资金费率工具
+      operationId: getFundingRateToolUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: symbol
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_FundRateDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/index-price:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取所有交易对的指数价格
+      operationId: getAllIndexPriceUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_PriceVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/index-price/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取指定交易对的指数价格
+      operationId: findIndexPriceListUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: 交易对
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        description: startTime
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: endTime
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: limit
+        required: false
+        style: form
+        schema:
+          maximum: 500
+          minimum: 1
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_IndexPriceDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/indicator:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取k线指标
+      operationId: getIndicatorUsingGET
+      parameters:
+      - name: tenant-id
+        in: header
+        description: tenant-id
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: symbol
+        required: true
+        style: form
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: name
+        required: true
+        style: form
+        schema:
+          type: string
+      - name: interval
+        in: query
+        description: interval
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: period
+        in: query
+        description: period
+        required: true
+        style: form
+        schema:
+          maximum: 180
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_string'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/kline:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取交易对的k线信息
+      operationId: getKlineUsingGET_1
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: interval
+        in: query
+        description: 时间间隔支持1m，3m,5m,15m,30m,1h,2h,4h,6h,8h,12h,1d,2d,3d,1w,1M
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 限制条数
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          maximum: 1500
+          minimum: 1
+          type: integer
+          format: int32
+      - name: startTime
+        in: query
+        description: 起始时间
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: 交易对
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_KlineDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/mark-price:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取所有交易对的标记价格
+      operationId: getAllMarkPriceUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_PriceVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/openprice:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取交易对指定时区当天0点的开盘时间，不传symbol获取所有可交货币对
+      operationId: getOpenPriceUsingGET
+      parameters:
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      - name: timeZone
+        in: query
+        description: 时区偏移秒值，如东八区传28800
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_OpenPriceVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/symbol-index-price:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取单个交易对的指数价格
+      operationId: getIndexPriceBySymbolUsingGET_1
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: 交易对
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PriceVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/symbol-mark-price:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取单个交易对的标记价格
+      operationId: getMarkPriceBySymbolUsingGET_1
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: 交易对
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PriceVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/ticker:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取指定交易对的行情信息
+      operationId: getTickerUsingGET_1
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: 交易对
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_TickerVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/ticker/book:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取指定交易对的买一卖一行情信息
+      operationId: getTickerBookUsingGET_1
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      - name: symbol
+        in: query
+        description: 交易对
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_TickerBookVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/ticker/books:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取全交易对的买一卖一行情信息
+      operationId: getTickerBooksUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_TickerBookVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/tickers:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取全交易对的行情信息
+      operationId: getTickersUsingGET
+      parameters:
+      - name: client-ip
+        in: header
+        description: client-ip
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_TickerVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/q/tradestats:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取统计信息
+      operationId: getTradeStatsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_TradeStatsVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/share/template:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取分享文案模版
+      operationId: getTemplateUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_ShareTemplateVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/notice/has-view-notice/{type}:
+    get:
+      tags:
+      - 合约信息
+      summary: 是否已阅读风险告知书
+      operationId: isReadNoticeUsingGET
+      parameters:
+      - name: type
+        in: path
+        description: type
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/notice/view-notice/{type}:
+    post:
+      tags:
+      - 合约信息
+      summary: 阅读风险告知书
+      operationId: readNoticeUsingPOST
+      parameters:
+      - name: type
+        in: path
+        description: type
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/dealSubAccount:
+    post:
+      tags:
+      - 合约信息
+      summary: 加入子账号、移除子账号
+      operationId: dealSubAccountUsingPOST
+      parameters:
+      - name: accountId
+        in: query
+        description: 子账号
+        required: true
+        style: form
+        allowReserved: false
+        schema:
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        description: add:加入,remove:移除
+        required: true
+        style: form
+        allowReserved: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/getDesc:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询描述
+      operationId: getDescUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: 交易员accountId
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_string'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/getSmartMoneySubAccounts:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询子账号列表
+      operationId: getSmartMoneySubAccountsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_SmartMoneySubAccountVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/notify/update:
+    post:
+      tags:
+      - 合约信息
+      summary: 开、关推送接口
+      operationId: updateNotifyUsingPOST
+      parameters:
+      - name: accountId
+        in: query
+        description: 交易员accountId
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: enable
+        in: query
+        description: enable
+        required: true
+        style: form
+        allowReserved: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/public/getTraderAmount:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询累计收益&资产
+      operationId: getTraderAmountUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: 交易员accountId
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: query
+        description: id
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: recentDays
+        in: query
+        description: 7:近7天;30:近30天;90:近90天;180:近180天;365:近一年;
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_TopTraderCumulativeVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/public/getTraderInfo:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询绩效分析【交易数据】
+      operationId: getTraderUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: 交易员accountId
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: query
+        description: id
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: recentDays
+        in: query
+        description: 7:近7天;30:近30天;90:近90天;180:近180天;365:近一年;
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_TopTraderInfoVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/public/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 分页查询顶级交易员
+      operationId: topTradersUsingGET
+      parameters:
+      - name: page
+        in: query
+        description: 页数,从1开始
+        required: false
+        style: form
+        schema:
+          maximum: 10
+          type: integer
+          format: int32
+      - name: ps
+        in: query
+        description: 每页显示数量,default=10
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: recentDays
+        in: query
+        description: 7:近7天;30:近30天;90:近90天;180:近180天;365:近1年;
+        required: false
+        style: form
+        schema:
+          pattern: ^(|7|30|90|180|365)$
+          type: string
+      - name: type
+        in: query
+        description: 类型，PROFIT_RATE：收益率;PROFIT_AND_LOSS：盈亏
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - PROFIT_AND_LOSS
+          - PROFIT_RATE
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_TopTraderVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/public/user-mark:
+    get:
+      tags:
+      - 合约信息
+      summary: 掩码处理接口
+      operationId: getMarkUsingGET
+      parameters:
+      - name: preId
+        in: query
+        description: 预处理id
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_string'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/self/getTraderAmount:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询累计收益&资产【用于我的主页】
+      operationId: getTraderAmountForSelfUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: 交易员accountId
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: recentDays
+        in: query
+        description: 7:近7天;30:近30天;90:近90天;180:近180天;365:近一年;
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_TopTraderCumulativeVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/self/traderInfo:
+    get:
+      tags:
+      - 合约信息
+      summary: 我的主页，主账号可以看子账号，子账号只能看自身。
+      operationId: getTraderForSelfUsingGET
+      parameters:
+      - name: accountId
+        in: query
+        description: 交易员accountId
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: recentDays
+        in: query
+        description: 7:近7天;30:近30天;90:近90天;180:近180天;365:近一年;
+        required: false
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_TraderInfoSelfVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/selfList:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询我的订阅【查询开关状态、订阅状态的接口】
+      operationId: topTradersForSelfUsingGET
+      parameters:
+      - name: page
+        in: query
+        description: 页数,从1开始
+        required: false
+        style: form
+        schema:
+          maximum: 10
+          type: integer
+          format: int32
+      - name: ps
+        in: query
+        description: 每页显示数量,default=10
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: recentDays
+        in: query
+        description: 7:近7天;30:近30天;90:近90天;180:近180天;365:近1年;
+        required: false
+        style: form
+        schema:
+          pattern: ^(|7|30|90|180|365)$
+          type: string
+      - name: type
+        in: query
+        description: 类型，PROFIT_RATE：收益率;PROFIT_AND_LOSS：盈亏
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - PROFIT_AND_LOSS
+          - PROFIT_RATE
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_TopTraderVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/sub/update:
+    post:
+      tags:
+      - 合约信息
+      summary: 订阅&取消订阅
+      operationId: updateSubUsingPOST
+      parameters:
+      - name: accountId
+        in: query
+        description: 交易员accountId
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: enable
+        in: query
+        description: enable
+        required: true
+        style: form
+        allowReserved: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/updateDesc:
+    post:
+      tags:
+      - 合约信息
+      summary: 更新描述
+      operationId: updateDescUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Component'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/updateSharePosition:
+    post:
+      tags:
+      - 合约信息
+      summary: 分享我的仓位开关
+      operationId: updateSharePositionUsingPOST
+      parameters:
+      - name: accountId
+        in: query
+        description: 交易员accountId
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: enable
+        in: query
+        description: enable
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/smartMoney/updateTradingSet:
+    post:
+      tags:
+      - 合约信息
+      summary: 实盘设置开启、关闭
+      operationId: updateTradingSetUsingPOST
+      parameters:
+      - name: accountId
+        in: query
+        description: 交易员accountId
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: integer
+          format: int64
+      - name: enable
+        in: query
+        description: enable
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/compat/account/is-open/{subAccountId}:
+    get:
+      tags:
+      - 合约信息
+      summary: 校验子账号是否开通合约
+      operationId: isOpenUsingGET
+      parameters:
+      - name: subAccountId
+        in: path
+        description: subAccountId
+        required: true
+        style: simple
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/compat/account/open:
+    get:
+      tags:
+      - 合约信息
+      summary: 是否已经开通合约
+      operationId: getUserOpenStatusUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CompatResponseDTO_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/compat/balance/convert:
+    get:
+      tags:
+      - 合约信息
+      summary: 资产总计转化
+      operationId: getBalanceConvertUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CompatResponseDTO_BalanceConvertVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/compat/balance/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 资产列表
+      operationId: getBalanceUsingGET_1
+      parameters:
+      - name: queryAccountId
+        in: query
+        description: queryAccountId
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CompatResponseDTO_List_AccountFunVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/compat/balance/{coin}:
+    get:
+      tags:
+      - 合约信息
+      summary: 单币种资产
+      operationId: getBalanceByCoinUsingGET_1
+      parameters:
+      - name: queryAccountId
+        in: query
+        description: queryAccountId
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: coin
+        in: path
+        description: coin
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CompatResponseDTO_AccountFunVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/compat/coins:
+    get:
+      tags:
+      - 合约信息
+      summary: 划转币种列表
+      operationId: getTransferCoinsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CompatResponseDTO_List_string'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/taker-over/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询接管记录
+      operationId: getListUsingGET
+      parameters:
+      - name: direction
+        in: query
+        description: 方向,default:NEXT:下一页;PREVIOUS:上一页
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: query
+        description: id,排序ID，用于翻页
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 每页显示数量,default=10
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: startTime
+        in: query
+        description: 起始时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: welfareAccount
+        in: query
+        description: 是否体验金账户
+        required: false
+        style: form
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_MongoPageResult_TakerOverVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/apply-trader:
+    post:
+      tags:
+      - 合约信息
+      summary: 申请跟单操盘手
+      operationId: applyUsingPOST
+      parameters:
+      - name: email
+        in: query
+        description: 邮箱
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: mediaAccount
+        in: query
+        description: 社媒联系方式
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: phone
+        in: query
+        description: 手机号
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: picture
+        in: query
+        description: 收益图片
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: positionPeriod
+        in: query
+        description: 持仓周期
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: tradingExperience
+        in: query
+        description: 交易经验
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: tradingStrategy
+        in: query
+        description: 交易策略
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/leverage/bracket/detail:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询单个交易对杠杆分层
+      operationId: getV1LeverageBracketDetail
+      parameters:
+      - name: symbol
+        in: query
+        description: symbol
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_SymbolBracketVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      x-operation-id-source: normalized
+      x-operation-id-original: getBracketDetailUsingGET
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/leverage/bracket/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询所有交易对杠杆分层
+      operationId: getBracketListUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_SymbolBracketCacheDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/account/agreement/agree-predict:
+    post:
+      tags:
+      - 合约信息
+      summary: 同意预测合约协议
+      operationId: agreePredictAgreementUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/account/agreement/is-open-predict:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询预测合约协议是否开通
+      operationId: isOpenPredictUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/account/info:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取账户相关信息
+      operationId: getAccountUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_AccountInfoVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/account/open:
+    post:
+      tags:
+      - 合约信息
+      summary: 开通合约
+      operationId: openFuturesUsingPOST
+      parameters:
+      - name: recommendCode
+        in: query
+        description: recommendCode
+        required: false
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/account/region:
+    get:
+      tags:
+      - 合约信息
+      summary: 检查开通合约地区
+      operationId: checkRegionUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/satisfaction-feedback:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取反馈
+      operationId: checkUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - 合约信息
+      summary: 提交反馈
+      operationId: submitUsingPOST
+      parameters:
+      - name: imageUrls
+        in: query
+        description: 上传图片url(多个逗号分隔)
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: labels
+        in: query
+        description: 反馈功能标签code(多个逗号分隔)
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: remark
+        in: query
+        description: 备注
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: satisfaction
+        in: query
+        description: 满意度code
+        required: true
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/satisfaction-feedback/feedbacks:
+    get:
+      tags:
+      - 合约信息
+      summary: 反馈功能标签列表
+      operationId: getFeedbacksUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_SatisfactionFeedbackTypeDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/welfare/bonus-detail-list:
+    get:
+      tags:
+      - 合约信息
+      summary: 体验金详情
+      operationId: bonusListUsingGET
+      parameters:
+      - name: currency
+        in: query
+        description: 币种, usdt
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: currencyId
+        in: query
+        description: 币种Id
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: direction
+        in: query
+        description: 方向,default:NEXT:下一页;PREVIOUS:上一页
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: id,排序ID，用于翻页
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 每页显示数量,default=100
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_MongoPageResult_BonusDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/welfare/deposit-coupon-detail-list:
+    get:
+      tags:
+      - 合约信息
+      summary: 储值券详情
+      operationId: depositCouponListUsingGET
+      parameters:
+      - name: currency
+        in: query
+        description: 币种, usdt
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: currencyId
+        in: query
+        description: 币种Id
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: direction
+        in: query
+        description: 方向,default:NEXT:下一页;PREVIOUS:上一页
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: id,排序ID，用于翻页
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 每页显示数量,default=100
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_MongoPageResult_DepositCouponDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/welfare/future-coupon:
+    get:
+      tags:
+      - 合约信息
+      summary: 合约可用赠金券
+      operationId: getWelfareCouponUsingGET
+      parameters:
+      - name: symbol
+        in: query
+        description: symbol
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_WelfareCoupon'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/auto-deleverage/history:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取自动减仓历史
+      operationId: getAutoDeleverageHistoryUsingGET
+      parameters:
+      - name: direction
+        in: query
+        description: 方向,default:NEXT:下一页;PREVIOUS:上一页
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: query
+        description: id,排序ID，用于翻页
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 每页显示数量,default=10
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: startTime
+        in: query
+        description: 起始时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: welfareAccount
+        in: query
+        description: 是否体验金账户
+        required: false
+        style: form
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_MongoPageResult_AutoDeleverageHistoryVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/setting/notify/funding-rate-clearing:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询资金费率提醒开关是否开启
+      operationId: getFundRateClearingNotificationUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - 合约信息
+      summary: 设置资金费率提醒开关
+      operationId: updateFundRateClearingNotificationUsingPOST
+      parameters:
+      - name: enable
+        in: query
+        description: enable
+        required: true
+        style: form
+        allowReserved: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/setting/notify/order-execution:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询合约订单成交提醒开关是否开启
+      operationId: getOrderExecutionNotificationUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - 合约信息
+      summary: 设置合约订单成交提醒开关
+      operationId: updateOrderExecutionNotificationUsingPOST
+      parameters:
+      - name: enable
+        in: query
+        description: enable
+        required: true
+        style: form
+        allowReserved: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/setting/notify/profit-trigger:
+    get:
+      tags:
+      - 合约信息
+      summary: 止盈止损提醒开关是否开启
+      operationId: getProfitTriggerUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/setting/notify/profit-trigger/update:
+    post:
+      tags:
+      - 合约信息
+      summary: 设置止盈止损提醒开关
+      operationId: updateProfitTriggerUsingPOST
+      parameters:
+      - name: enable
+        in: query
+        description: enable
+        required: true
+        style: form
+        allowReserved: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/setting/price-protection:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询止盈止损价差保护开关是否开启
+      operationId: getPriceProtectionUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - 合约信息
+      summary: 设置止盈止损价差保护开关
+      operationId: updatePriceProtectionUsingPOST
+      parameters:
+      - name: enable
+        in: query
+        description: enable
+        required: true
+        style: form
+        allowReserved: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/balance/bills:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取用户账务流水
+      operationId: getBalanceBillsUsingGET
+      parameters:
+      - name: coin
+        in: query
+        description: 币种
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: direction
+        in: query
+        description: 方向,default:NEXT:下一页;PREVIOUS:上一页
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: id
+        in: query
+        description: id,排序ID，用于翻页
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 每页显示数量,default=10
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: startTime
+        in: query
+        description: 起始时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: EXCHANGE:划转;CLOSE_POSITION:平仓盈亏;TAKE_OVER:仓位接管;QIANG_PING_MANAGER:强平清算费（手续费）;FUND:资金费用;FEE:手续费 (开仓、平仓、强平);ADL:自动减仓MERGE:仓位合并
+        required: false
+        style: form
+        schema:
+          type: string
+          enum:
+          - ADL
+          - AFFILIATE_KICKBACK
+          - BONUS_COUPON_GRANT
+          - BONUS_COUPON_PROFIT
+          - BONUS_COUPON_RECOVERY
+          - BONUS_DEDUCTION
+          - BONUS_GRANT
+          - BONUS_TAKE_BACK
+          - CASH_BACK
+          - CLOSE_POSITION
+          - COPY_TRADE_FOLLOWER_PROFIT
+          - COPY_TRADE_FOLLOWER_PROFIT_BACK
+          - COPY_TRADE_FOLLOW_COUPON_CLAIM
+          - COPY_TRADE_LEADER_PROFIT
+          - COPY_TRADE_PLATFORM_LEADER_PROFIT
+          - COPY_TRADE_RECOMMEND_REWARD_PROFIT
+          - DEFAULT
+          - DELIVERY_FEE
+          - DEPOSIT_COUPON_GRANT
+          - DEPOSIT_COUPON_TAKE_BACK
+          - EVENT_FUTURE_FROZEN
+          - EVENT_FUTURE_FUND_POOL
+          - EVENT_FUTURE_PROFIT
+          - EXCHANGE
+          - FEE
+          - FICTITIOUS
+          - FUND
+          - MERGE
+          - QIANG_PING_MANAGER
+          - SYSTEM_ADD
+          - SYSTEM_CLOSE_POSITION
+          - TAKE_OVER
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_MongoPageResult_BalanceBillVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/balance/coupon/record:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取抵扣金记录
+      operationId: getCouponRecordUsingGET
+      parameters:
+      - name: coin
+        in: query
+        description: coin
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: page
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: size
+        in: query
+        description: size
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_CouponRecordVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/balance/detail:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取用户单币种资金
+      operationId: getBalanceByCoinUsingGET
+      parameters:
+      - name: coin
+        in: query
+        description: 币种
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_BalanceVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/balance/fund/transfer:
+    post:
+      tags:
+      - 合约信息
+      summary: 资金划转(合约子账户间划转)
+      operationId: exchangeUsingPOST
+      parameters:
+      - name: amount
+        in: query
+        description: 数量
+        required: true
+        style: form
+        schema:
+          type: number
+          format: bigdecimal
+      - name: coin
+        in: query
+        description: 币种
+        required: true
+        style: form
+        schema:
+          pattern: ^[A-Za-z0-9]{1,20}$
+          type: string
+      - name: creator
+        in: query
+        description: 创建人
+        required: false
+        style: form
+        schema:
+          pattern: ^.{0,64}$
+          type: string
+      - name: inAccount
+        in: query
+        description: 划入账户ID
+        required: true
+        style: form
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: outAccount
+        in: query
+        description: 划出账户ID
+        required: true
+        style: form
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: remark
+        in: query
+        description: 备注
+        required: false
+        style: form
+        schema:
+          pattern: ^.{0,255}$
+          type: string
+      - name: userId
+        in: query
+        description: 用户ID
+        required: true
+        style: form
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_object'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/balance/funding-rate-list:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取资金费用
+      operationId: getFundingListUsingGET
+      parameters:
+      - name: direction
+        in: query
+        description: 方向,default:NEXT:下一页;PREVIOUS:上一页
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: endTime
+        in: query
+        description: 结束时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: forceClose
+        in: query
+        description: 是否强平
+        required: false
+        style: form
+        schema:
+          type: boolean
+      - name: id
+        in: query
+        description: id,排序ID，用于翻页
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: limit
+        in: query
+        description: 每页显示数量,default=10
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: orderOrigType
+        in: query
+        description: '历史订单类型  1：限价委托； 2：市价委托； 3：限价止盈止损； 4：市价止盈止损 5: mmr止损'''
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: orderSide
+        in: query
+        description: '下单方向: 1买、2卖'
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: origType
+        in: query
+        description: 条件委托类型 1：限价止盈；2：限价止损；3：市价止盈；4：市价止损'
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int32
+      - name: startTime
+        in: query
+        description: 起始时间
+        required: false
+        style: form
+        schema:
+          type: integer
+          format: int64
+      - name: states
+        in: query
+        description: '订单状态 2: 部分成交 3：全部成交；4：用户撤销；6：已过期'' (多选 英文逗号分隔)'
+        required: false
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: symbol
+        in: query
+        description: 交易对
+        required: false
+        style: form
+        schema:
+          type: string
+      - name: welfareAccount
+        in: query
+        description: 是否体验金账户
+        required: false
+        style: form
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_MongoPageResult_FundRateRecordDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/balance/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取用户资金
+      operationId: getBalanceUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_BalanceVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/user/step-rate/getOtherPlatforms:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取第三方平台（无需登录）
+      operationId: getPublicOtherPlatformsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_string'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/public/user/step-rate/getStepRates:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取用户费率表（无需登录）
+      operationId: getPublicStepRatesUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_StepRateDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/step-rate:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取用户阶梯费率(对外)
+      operationId: getUserStepRate2UsingGET_1
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_UserStepRateDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/step-rate/getOtherPlatforms:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取第三方平台
+      operationId: getOtherPlatformsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_string'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/step-rate/getStepRates:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取用户费率表
+      operationId: getStepRatesUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_StepRateDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/step-rate/getUserStepApplyResult:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取用户申请临时等级结果
+      operationId: getUserStepApplyResultUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_UserStepApplyResultDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/step-rate/getUserStepRate:
+    get:
+      tags:
+      - 合约信息
+      summary: 获取用户阶梯费率
+      operationId: getUserStepRateUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_UserStepRateDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: true
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/step-rate/recent-trade:
+    get:
+      tags:
+      - 合约信息
+      summary: 查询用户近30日交易量
+      operationId: findRecentTradeUsingGET
+      parameters:
+      - name: page
+        in: query
+        description: 页码
+        required: false
+        style: form
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: size
+        in: query
+        description: 单页数
+        required: false
+        style: form
+        schema:
+          maximum: 10000
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_PageResult_UserRecentTradeDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/step-rate/upload:
+    post:
+      tags:
+      - 合约信息
+      summary: 上传图片
+      operationId: uploadUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              format: binary
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_UploadUrlDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/step-rate/userStepApply:
+    post:
+      tags:
+      - 合约信息
+      summary: 用户阶梯费率申请
+      operationId: userStepApplyUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserStepApplyDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/collection/add:
+    post:
+      tags:
+      - 合约信息
+      summary: 收藏交易对（废弃）
+      operationId: collectSymbolUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: true
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/collection/cancel:
+    post:
+      tags:
+      - 合约信息
+      summary: 取消收藏交易对（废弃）
+      operationId: cancelCollectSymbolUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: true
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/collection/list:
+    get:
+      tags:
+      - 合约信息
+      summary: 自选交易对列表
+      operationId: getCollectionListUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_List_string'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/user/collection/update:
+    post:
+      tags:
+      - 合约信息
+      summary: 更新自选交易对
+      operationId: updateCollectionSymbolsUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCollectionDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/common/download-private/{key}:
+    get:
+      tags:
+      - 合约信息
+      summary: 私有目录,下载图片
+      operationId: downLoadFromPrivateUsingGET
+      parameters:
+      - name: busType
+        in: query
+        description: 业务类型:跟单:copytrade,阶梯费率：stepRate
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      - name: key
+        in: path
+        description: key
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_boolean'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/common/upload-private:
+    post:
+      tags:
+      - 合约信息
+      summary: 上传图片，私有目录
+      operationId: uploadPrivateUsingPOST
+      parameters:
+      - name: busType
+        in: query
+        description: 业务类型:跟单:copytrade,阶梯费率：stepRate
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              format: binary
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_string'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+  /v1/common/upload-public:
+    post:
+      tags:
+      - 合约信息
+      summary: 上传图片，公共目录
+      operationId: uploadPublicUsingPOST
+      parameters:
+      - name: busType
+        in: query
+        description: 业务类型:跟单:copytrade,阶梯费率：stepRate
+        required: true
+        style: form
+        allowReserved: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              format: binary
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommonResponse_string'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    servers:
+    - url: https://fapi.xt.com
+      description: Inferred Url
+components:
+  schemas:
+    OpenInterestVO:
+      title: OpenInterestVO
+      type: object
+      properties:
+        openInterest:
+          type: number
+          description: 头寸
+          format: bigdecimal
+        openInterestUsd:
+          type: number
+          description: 头寸价值
+          format: bigdecimal
+        symbol:
+          type: string
+          description: 交易对
+        time:
+          type: integer
+          description: 时间
+          format: int64
+    CommonResponse_OpenInterestVO:
+      title: CommonResponse«OpenInterestVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/OpenInterestVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_MongoPageResult_RiskBalanceVO:
+      title: CommonResponse«MongoPageResult«RiskBalanceVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/MongoPageResult_RiskBalanceVO'
+        returnCode:
+          type: integer
+          format: int32
+    MongoPageResult_RiskBalanceVO:
+      title: MongoPageResult«RiskBalanceVO»
+      type: object
+      properties:
+        hasNext:
+          type: boolean
+          description: 是否有下一页
+          example: false
+        hasPrev:
+          type: boolean
+          description: 是否有上一页
+          example: false
+        items:
+          type: array
+          description: 数据列表
+          items:
+            $ref: '#/components/schemas/RiskBalanceVO'
+    ErrorMessage:
+      title: ErrorMessage
+      type: object
+      properties:
+        args:
+          type: array
+          items:
+            type: object
+        code:
+          type: string
+        msg:
+          type: string
+    RiskBalanceVO:
+      title: RiskBalanceVO
+      type: object
+      properties:
+        amount:
+          type: number
+          description: 余额
+          format: bigdecimal
+        coin:
+          type: string
+          description: 币种
+        createdTime:
+          type: integer
+          description: 时间
+          format: int64
+        id:
+          type: integer
+          description: id
+          format: int64
+    ContractVO:
+      title: ContractVO
+      type: object
+      properties:
+        ask:
+          type: string
+          description: Current lowest ask price
+        base_currency:
+          type: string
+          description: Symbol/currency code of base pair, eg. BTC
+        base_volume:
+          type: string
+          description: 24小时交易量
+        bid:
+          type: string
+          description: Current highest bid price
+        collection_internal:
+          type: integer
+          description: 收取时间间隔（小时）
+          format: int32
+        contractSize:
+          type: number
+          format: bigdecimal
+        end_timestamp:
+          type: integer
+          description: Ending of this derivative product (relevant for expirable futures or options)
+          format: int64
+        funding_rate:
+          type: number
+          description: 资金费率
+          format: bigdecimal
+        high:
+          type: string
+          description: 24小时最高交易价格
+        id:
+          type: integer
+          format: int64
+        index_currency:
+          type: string
+          description: Underlying currency for index
+        index_name:
+          type: string
+          description: Name of the underlying index if any
+        index_price:
+          type: string
+          description: Underlying index price
+        last_price:
+          type: string
+          description: 最新价格
+        low:
+          type: string
+          description: 24小时最低交易价格
+        next_funding_rate:
+          type: number
+          description: Upcoming predicted funding rate
+          format: bigdecimal
+        next_funding_rate_timestamp:
+          type: integer
+          description: 下次资金费率时间
+          format: int64
+        open_interest:
+          type: number
+          description: The open interest in the last 24 hours in contracts
+          format: bigdecimal
+        product_type:
+          type: string
+          description: 产品类型
+        start_timestamp:
+          type: integer
+          description: Starting of this derivative product (relevant for expirable futures or options)
+          format: int64
+        symbol:
+          type: string
+        target_currency:
+          type: string
+          description: Symbol/currency code of target pair, eg. ETH
+        target_volume:
+          type: string
+          description: 24小时交易额
+        ticker_id:
+          type: string
+          description: Identifier of a ticker with delimiter to separate base/target, eg. BTC-PERP
+        underlyingType:
+          type: integer
+          format: int32
+    OrderBookVO:
+      title: OrderBookVO
+      type: object
+      properties:
+        asks:
+          type: array
+          description: asks
+          items:
+            type: array
+            items:
+              type: string
+        bids:
+          type: array
+          description: bids
+          items:
+            type: array
+            items:
+              type: string
+        ticker_id:
+          type: string
+          description: 交易对
+        timestamp:
+          type: integer
+          description: 更新时间
+          format: int64
+    MarketVO:
+      title: MarketVO
+      type: object
+      properties:
+        category:
+          type: string
+        contractType:
+          type: integer
+          format: int32
+        eventTime:
+          type: integer
+          format: int64
+        rate:
+          type: number
+          format: bigdecimal
+        status:
+          type: string
+        symbol:
+          type: string
+        underlyingType:
+          type: integer
+          format: int32
+    MarketCategoryVO:
+      title: MarketCategoryVO
+      type: object
+      properties:
+        category:
+          type: string
+        desc:
+          type: string
+    PageResult_MarketVO:
+      title: PageResult«MarketVO»
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketVO'
+        page:
+          type: integer
+          format: int64
+        ps:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+    CommonResponse_List_MarketCategoryVO:
+      title: CommonResponse«List«MarketCategoryVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketCategoryVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_PageResult_MarketVO:
+      title: CommonResponse«PageResult«MarketVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/PageResult_MarketVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_long:
+      title: CommonResponse«long»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: integer
+          format: int64
+        returnCode:
+          type: integer
+          format: int32
+    LeverageBracketCacheDTO:
+      title: LeverageBracketCacheDTO
+      type: object
+      properties:
+        bracket:
+          type: integer
+          description: 档位
+          format: int32
+        maintMarginRate:
+          type: number
+          description: 维持保证金率
+          format: bigdecimal
+        maxLeverage:
+          type: number
+          description: 最大杠杆倍数
+          format: bigdecimal
+        maxNominalValue:
+          type: number
+          description: 该层最大名义价值
+          format: bigdecimal
+        maxStartMarginRate:
+          type: number
+          description: 最大起始保证金率
+          format: bigdecimal
+        minLeverage:
+          type: number
+          description: 最小杠杆倍数
+          format: bigdecimal
+        startMarginRate:
+          type: number
+          description: 起始保证金率
+          format: bigdecimal
+        symbol:
+          type: string
+          description: 交易对
+    CommonResponse_List_SymbolBracketCacheDTO:
+      title: CommonResponse«List«SymbolBracketCacheDTO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SymbolBracketCacheDTO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_SymbolBracketVO:
+      title: CommonResponse«SymbolBracketVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/SymbolBracketVO'
+        returnCode:
+          type: integer
+          format: int32
+    SymbolBracketVO:
+      title: SymbolBracketVO
+      type: object
+      properties:
+        leverageBrackets:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeverageBracketCacheDTO'
+        symbol:
+          type: string
+    SymbolBracketCacheDTO:
+      title: SymbolBracketCacheDTO
+      type: object
+      properties:
+        leverageBrackets:
+          type: array
+          items:
+            $ref: '#/components/schemas/LeverageBracketCacheDTO'
+        symbol:
+          type: string
+    EventFutureConfigVO:
+      title: EventFutureConfigVO
+      type: object
+      properties:
+        amountConfig:
+          type: string
+          description: 预设金额
+        amountScale:
+          type: integer
+          description: 金额精度
+          format: int32
+        cycleConfig:
+          type: string
+          description: 周期配置
+        maxAmount:
+          type: number
+          description: 最大下单金额
+          format: bigdecimal
+        minAmount:
+          type: number
+          description: 最小下单金额
+          format: bigdecimal
+        state:
+          type: integer
+          description: 状态
+          format: int32
+        symbol:
+          type: string
+          description: 交易对
+    CommonResponse_List_EventFutureConfigVO:
+      title: CommonResponse«List«EventFutureConfigVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventFutureConfigVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_EventFutureLimitInfoVO:
+      title: CommonResponse«EventFutureLimitInfoVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/EventFutureLimitInfoVO'
+        returnCode:
+          type: integer
+          format: int32
+    EventFutureLimitInfoVO:
+      title: EventFutureLimitInfoVO
+      type: object
+      properties:
+        isFirstUse:
+          type: boolean
+          description: 是否首次使用
+          example: false
+        isInLimit:
+          type: boolean
+          description: 是否受限
+          example: false
+    CoinDetailVO:
+      title: CoinDetailVO
+      type: object
+      properties:
+        actualPrecision:
+          type: integer
+          description: 实际精度
+          format: int32
+        coin:
+          type: string
+          description: 币种
+        displayPrecision:
+          type: integer
+          description: 显示精度
+          format: int32
+        spotCoin:
+          type: string
+          description: 现货币种
+    CommonResponse_List_string:
+      title: CommonResponse«List«string»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            type: string
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_List_SymbolCacheDTO:
+      title: CommonResponse«List«SymbolCacheDTO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SymbolCacheDTO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_List_CoinDetailVO:
+      title: CommonResponse«List«CoinDetailVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoinDetailVO'
+        returnCode:
+          type: integer
+          format: int32
+    SymbolCacheDTO:
+      title: SymbolCacheDTO
+      type: object
+      properties:
+        baseCoin:
+          type: string
+          description: 标的资产
+        baseCoinDisplayPrecision:
+          type: integer
+          description: 标的币种显示精度
+          format: int32
+        baseCoinPrecision:
+          type: integer
+          description: 标的币种精度
+          format: int32
+        cnDesc:
+          type: string
+          description: 合约中文描述
+        cnName:
+          type: string
+          description: 合约中文名称
+        cnRemark:
+          type: string
+          description: 合约备注(中文)
+        contractSize:
+          type: number
+          description: 合约乘数（面值）
+          format: bigdecimal
+        contractType:
+          type: string
+          description: 合约类型，永续，交割
+        curMaxLeverage:
+          type: integer
+          description: 当前杠杆最大倍数
+          format: int32
+        deliveryCompletion:
+          type: boolean
+          description: 交割是否完成
+          example: false
+        deliveryDate:
+          type: integer
+          description: 交割时间
+          format: int64
+        deliveryPrice:
+          type: number
+          description: 交割价格
+          format: bigdecimal
+        depthPrecisionMerge:
+          type: integer
+          description: 盘口精度合并
+          format: int32
+        displaySwitch:
+          type: boolean
+        enDesc:
+          type: string
+          description: 合约英文描述
+        enName:
+          type: string
+          description: 合约英文名称
+        enRemark:
+          type: string
+          description: 合约备注(英文)
+        fastTrackCallbackRate1:
+          type: number
+          description: 跟踪委托-快捷回调率1
+          format: bigdecimal
+        fastTrackCallbackRate2:
+          type: number
+          description: 跟踪委托-快捷回调率2
+          format: bigdecimal
+        id:
+          type: integer
+          format: int64
+        initLeverage:
+          type: integer
+          description: 初始杠杆倍数
+          format: int32
+        initPositionType:
+          type: string
+          description: 初始仓位类型
+        isDisplay:
+          type: boolean
+          description: 是否展示
+          example: false
+        isOpenApi:
+          type: boolean
+          description: 是否支持OpenApi
+          example: false
+        labels:
+          type: array
+          description: 标签
+          items:
+            type: string
+        latestPriceDeviation:
+          minimum: 0
+          type: number
+          description: 最新价格与标记价格偏离，默认0.01,当最新价格和标记价格价差超过时，止盈止损订单将不会触发
+          format: bigdecimal
+        liquidationFee:
+          type: number
+          description: 强平手续费
+          format: bigdecimal
+        makerFee:
+          type: number
+          description: maker手续费
+          format: bigdecimal
+        marketCloseTakeBound:
+          minimum: 0
+          type: number
+          description: 市价平偏离比例
+          format: bigdecimal
+        marketOpenTakeBound:
+          minimum: 0
+          type: number
+          description: 市价开偏离比例
+          format: bigdecimal
+        marketTakeBound:
+          type: number
+          description: 市价单最多价格偏离
+          format: bigdecimal
+        maxEntrusts:
+          type: integer
+          description: 最多open条件单
+          format: int32
+        maxNotional:
+          type: number
+          description: 最大名义价值
+          format: bigdecimal
+        maxOpenOrders:
+          type: integer
+          description: 最多open订单
+          format: int32
+        maxPrice:
+          type: number
+          description: 预测合约价格上限(原型指数价格上限)
+          format: bigdecimal
+        maxTrackCallbackRate:
+          type: number
+          description: 跟踪委托-最大回调率
+          format: bigdecimal
+        minNotional:
+          type: number
+          description: 最小名义价值
+          format: bigdecimal
+        minPrice:
+          type: number
+          description: 预测合约价格下限(原型指数价格下限)
+          format: bigdecimal
+        minQty:
+          type: number
+          description: 最小数量
+          format: bigdecimal
+        minStepPrice:
+          type: number
+          description: 最小价格变动单位
+          format: bigdecimal
+        minTrackCallbackRate:
+          type: number
+          description: 跟踪委托-最小回调率
+          format: bigdecimal
+        multiplierDown:
+          type: number
+          description: 限价卖单下限百分比
+          format: bigdecimal
+        multiplierUp:
+          type: number
+          description: 限价买单价格上限百分比
+          format: bigdecimal
+        nextOpenTime:
+          type: integer
+          description: 下次开市时间戳（毫秒）
+          format: int64
+        offTime:
+          type: string
+          description: 下线时间
+          format: date-time
+        onboardDate:
+          type: integer
+          description: 上线时间
+          format: int64
+        openSwitch:
+          type: boolean
+          description: 允许开仓开关
+          example: false
+        pair:
+          type: string
+          description: 标的交易对
+        plates:
+          type: array
+          items:
+            type: integer
+            format: int64
+        predictEventParam:
+          type: string
+          description: 事件关联参数
+        predictEventSort:
+          type: string
+          description: 事件关联排序:WIN 胜, FLAT 平, NEGATIVE 负
+        predictEventType:
+          type: string
+          description: 预测事件类型:PERPETUAL 永续事件，ONCE 单事件
+        pricePrecision:
+          type: integer
+          description: 价格精度
+          format: int32
+        productType:
+          type: string
+          description: 合约类型，perpetual, futures，不区分交割间隔
+        quantityPrecision:
+          type: integer
+          description: 数量精度
+          format: int32
+        quoteCoin:
+          type: string
+          description: 报价资产
+        quoteCoinDisplayPrecision:
+          type: integer
+          description: 报价币种显示精度
+          format: int32
+        quoteCoinPrecision:
+          type: integer
+          description: 报价币种精度
+          format: int32
+        riskExpireTime:
+          type: integer
+          description: 风控设置的当前最大杠杆倍数和当前名义持仓价值系数的过期时间
+          format: int64
+        riskNominalValueCoefficient:
+          type: number
+          description: 当前名义持仓价值系数
+          format: bigdecimal
+        spotCoin:
+          type: string
+          description: 币种
+        state:
+          type: integer
+          description: 状态
+          format: int32
+        supportEntrustType:
+          type: string
+          description: 支持计划委托类型
+        supportOrderType:
+          type: string
+          description: 支持订单类型
+        supportPositionType:
+          type: string
+          description: 支持仓位类型
+        supportTimeInForce:
+          type: string
+          description: 支持有效方式
+        symbol:
+          type: string
+          description: 交易对
+        symbolGroupId:
+          type: integer
+          format: int64
+        symbolId:
+          type: integer
+          format: int64
+        takerFee:
+          type: number
+          description: taker手续费
+          format: bigdecimal
+        tradeSwitch:
+          type: boolean
+          description: 交易对开关
+          example: false
+        underlyingType:
+          type: string
+          description: 标的类型，币本位，u本位
+        updatedTime:
+          type: string
+          description: 更新时间
+          format: date-time
+    CommonResponse_SymbolCacheDTO:
+      title: CommonResponse«SymbolCacheDTO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/SymbolCacheDTO'
+        returnCode:
+          type: integer
+          format: int32
+    PlateVO:
+      title: PlateVO
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id
+          format: int64
+        plate:
+          type: string
+          description: 名称
+        symbolSortRule:
+          type: integer
+          description: 板块内币对排序规则 0 前端默认 1 按币对上线时间倒序
+          format: int32
+    CommonResponse_List_PlateVO:
+      title: CommonResponse«List«PlateVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlateVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_PageResult_MMTradeVO:
+      title: CommonResponse«PageResult«MMTradeVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/PageResult_MMTradeVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_DepthVO:
+      title: CommonResponse«DepthVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/DepthVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_List_TickerBookVO:
+      title: CommonResponse«List«TickerBookVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TickerBookVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_FundRateDTO:
+      title: CommonResponse«FundRateDTO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/FundRateDTO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_TickerVO:
+      title: CommonResponse«TickerVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/TickerVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_List_DealVO:
+      title: CommonResponse«List«DealVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/DealVO'
+        returnCode:
+          type: integer
+          format: int32
+    KlineDTO:
+      title: KlineDTO
+      type: object
+      properties:
+        a:
+          type: string
+          description: 成交量
+        c:
+          type: string
+          description: 结束价
+        h:
+          type: string
+          description: 最高价
+        l:
+          type: string
+          description: 最低价
+        o:
+          type: string
+          description: 开始价
+        p:
+          type: string
+          description: 交易对Pair
+        s:
+          type: string
+          description: 交易对
+        t:
+          type: integer
+          description: 时间
+          format: int64
+        v:
+          type: string
+          description: 成交额
+    CommonResponse_List_PriceVO:
+      title: CommonResponse«List«PriceVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceVO'
+        returnCode:
+          type: integer
+          format: int32
+    TradeStatsVO:
+      title: TradeStatsVO
+      type: object
+      properties:
+        openPositionValue:
+          type: number
+          description: 所有交易对未平仓量
+          format: bigdecimal
+        time:
+          type: integer
+          description: 时间
+          format: int64
+        tradeDataValue:
+          type: number
+          description: 所有交易对24小时成交额
+          format: bigdecimal
+    CommonResponse_string:
+      title: CommonResponse«string»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: string
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_List_TickerVO:
+      title: CommonResponse«List«TickerVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TickerVO'
+        returnCode:
+          type: integer
+          format: int32
+    TickerVO:
+      title: TickerVO
+      type: object
+      properties:
+        a:
+          type: string
+          description: 24小时成交量
+        c:
+          type: string
+          description: 最新价
+        h:
+          type: string
+          description: 24小时最高价
+        l:
+          type: string
+          description: 24小时最低价
+        o:
+          type: string
+          description: 24小时前第一笔成交价
+        r:
+          type: string
+          description: 24小时涨跌幅
+        s:
+          type: string
+          description: 交易对
+        t:
+          type: integer
+          description: 时间
+          format: int64
+        v:
+          type: string
+          description: 24小时成交额
+    CommonResponse_TradeStatsVO:
+      title: CommonResponse«TradeStatsVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/TradeStatsVO'
+        returnCode:
+          type: integer
+          format: int32
+    FundRateDTO:
+      title: FundRateDTO
+      type: object
+      properties:
+        collectionInternal:
+          type: integer
+          format: int32
+        fundingRate:
+          type: number
+          format: bigdecimal
+        nextCollectionTime:
+          type: integer
+          format: int64
+        symbol:
+          type: string
+    CommonResponse_MongoPageResult_FundRateRecordVO:
+      title: CommonResponse«MongoPageResult«FundRateRecordVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/MongoPageResult_FundRateRecordVO'
+        returnCode:
+          type: integer
+          format: int32
+    TickerBookVO:
+      title: TickerBookVO
+      type: object
+      properties:
+        ap:
+          type: string
+          description: asks price(卖一价)
+        aq:
+          type: string
+          description: asks qty(卖一量)
+        bp:
+          type: string
+          description: bids price(买一价)
+        bq:
+          type: string
+          description: bids qty(买一量)
+        s:
+          type: string
+          description: 交易对(symbol)
+        t:
+          type: integer
+          description: 更新时间(time)
+          format: int64
+    CommonResponse_List_FundRateRecordVO:
+      title: CommonResponse«List«FundRateRecordVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/FundRateRecordVO'
+        returnCode:
+          type: integer
+          format: int32
+    DealVO:
+      title: DealVO
+      type: object
+      properties:
+        a:
+          type: number
+          description: 成交量
+          format: bigdecimal
+        m:
+          type: string
+          description: 买卖方向
+        p:
+          type: number
+          description: 成交价
+          format: bigdecimal
+        s:
+          type: string
+          description: 交易对
+        t:
+          type: integer
+          description: 成交时间
+          format: int64
+    PriceVO:
+      title: PriceVO
+      type: object
+      properties:
+        p:
+          type: number
+          description: 价格
+          format: bigdecimal
+        s:
+          type: string
+          description: 交易对
+        t:
+          type: integer
+          description: 时间
+          format: int64
+    CommonResponse_TickerBookVO:
+      title: CommonResponse«TickerBookVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/TickerBookVO'
+        returnCode:
+          type: integer
+          format: int32
+    IndexPriceDTO:
+      title: IndexPriceDTO
+      type: object
+      properties:
+        p:
+          type: string
+        s:
+          type: string
+        t:
+          type: integer
+          format: int64
+    AggTickerVO:
+      title: AggTickerVO
+      type: object
+      properties:
+        a:
+          type: string
+          description: 24小时成交量
+        ap:
+          type: string
+          description: 卖一价格
+        bp:
+          type: string
+          description: 买一价格
+        c:
+          type: string
+          description: 最新价
+        h:
+          type: string
+          description: 24小时最高价
+        i:
+          type: string
+          description: 指数价格
+        l:
+          type: string
+          description: 24小时最低价
+        m:
+          type: string
+          description: 标记价格
+        o:
+          type: string
+          description: 24小时前第一笔成交价
+        r:
+          type: string
+          description: 24小时涨跌幅
+        s:
+          type: string
+          description: 交易对
+        t:
+          type: integer
+          description: 时间
+          format: int64
+        v:
+          type: string
+          description: 24小时成交额
+    CommonResponse_List_IndexPriceDTO:
+      title: CommonResponse«List«IndexPriceDTO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IndexPriceDTO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_List_KlineDTO:
+      title: CommonResponse«List«KlineDTO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/KlineDTO'
+        returnCode:
+          type: integer
+          format: int32
+    DepthVO:
+      title: DepthVO
+      type: object
+      properties:
+        a:
+          type: array
+          description: 卖单
+          items:
+            type: array
+            items:
+              type: string
+        b:
+          type: array
+          description: 买单
+          items:
+            type: array
+            items:
+              type: string
+        s:
+          type: string
+          description: 交易对
+        t:
+          type: integer
+          description: 时间
+          format: int64
+        u:
+          type: integer
+          description: updateId
+          format: int64
+    OpenPriceVO:
+      title: OpenPriceVO
+      type: object
+      properties:
+        openPrice:
+          type: number
+          description: 开盘价
+          format: bigdecimal
+        symbol:
+          type: string
+          description: 交易对
+    CommonResponse_List_OpenPriceVO:
+      title: CommonResponse«List«OpenPriceVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenPriceVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_List_AggTickerVO:
+      title: CommonResponse«List«AggTickerVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggTickerVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_PriceVO:
+      title: CommonResponse«PriceVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/PriceVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_AggTickerVO:
+      title: CommonResponse«AggTickerVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/AggTickerVO'
+        returnCode:
+          type: integer
+          format: int32
+    MongoPageResult_FundRateRecordVO:
+      title: MongoPageResult«FundRateRecordVO»
+      type: object
+      properties:
+        hasNext:
+          type: boolean
+          description: 是否有下一页
+          example: false
+        hasPrev:
+          type: boolean
+          description: 是否有上一页
+          example: false
+        items:
+          type: array
+          description: 数据列表
+          items:
+            $ref: '#/components/schemas/FundRateRecordVO'
+    FundRateRecordVO:
+      title: FundRateRecordVO
+      type: object
+      properties:
+        collectionInternal:
+          type: integer
+          description: 收取时间间隔（秒）
+          format: int64
+        createdTime:
+          type: integer
+          description: 时间
+          format: int64
+        fundingRate:
+          type: number
+          description: 最新资金费率
+          format: bigdecimal
+        id:
+          type: integer
+          description: id
+          format: int64
+        symbol:
+          type: string
+          description: 交易对
+    PageResult_MMTradeVO:
+      title: PageResult«MMTradeVO»
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MMTradeVO'
+        page:
+          type: integer
+          format: int64
+        ps:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+    MMTradeVO:
+      title: MMTradeVO
+      type: object
+      properties:
+        clientOrderId:
+          type: string
+        fee:
+          type: string
+        isMaker:
+          type: boolean
+        marginUnfrozen:
+          type: string
+        oppositeUserId:
+          type: integer
+          format: int64
+        orderId:
+          type: string
+        orderSide:
+          type: string
+        positionSide:
+          type: string
+        price:
+          type: string
+        quantity:
+          type: string
+        symbol:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+    CommonResponse_List_ShareTemplateVO:
+      title: CommonResponse«List«ShareTemplateVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShareTemplateVO'
+        returnCode:
+          type: integer
+          format: int32
+    ShareTemplateVO:
+      title: ShareTemplateVO
+      type: object
+      properties:
+        areaDown:
+          type: number
+          description: 收益区间下限
+          format: bigdecimal
+        areaUp:
+          type: number
+          description: 收益区间上限
+          format: bigdecimal
+        cnName:
+          type: string
+          description: 文案展示中文名称
+        enName:
+          type: string
+          description: 文案展示英文名称
+    CommonResponse_boolean:
+      title: CommonResponse«boolean»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: boolean
+        returnCode:
+          type: integer
+          format: int32
+    AmountDTO:
+      title: AmountDTO
+      type: object
+      properties:
+        amount:
+          type: number
+          format: bigdecimal
+        time:
+          type: integer
+          format: int64
+    PageResult_TopTraderVO:
+      title: PageResult«TopTraderVO»
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopTraderVO'
+        page:
+          type: integer
+          format: int64
+        ps:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+    CommonResponse_TraderInfoSelfVO:
+      title: CommonResponse«TraderInfoSelfVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/TraderInfoSelfVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_List_SmartMoneySubAccountVO:
+      title: CommonResponse«List«SmartMoneySubAccountVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SmartMoneySubAccountVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_TopTraderInfoVO:
+      title: CommonResponse«TopTraderInfoVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/TopTraderInfoVO'
+        returnCode:
+          type: integer
+          format: int32
+    TopTraderInfoVO:
+      title: TopTraderInfoVO
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: 帐户id
+        avatar:
+          type: string
+          description: 头像
+        avgHoldTime:
+          type: number
+          description: 平均持仓时间
+          format: bigdecimal
+        avgLoss:
+          type: number
+          description: 平均亏损
+          format: bigdecimal
+        avgProfit:
+          type: number
+          description: 平均盈利
+          format: bigdecimal
+        avgTradeTimes:
+          type: number
+          description: 平均每天交易频次
+          format: bigdecimal
+        bigDrawdown:
+          type: number
+          description: 最大回撤
+          format: bigdecimal
+        days:
+          type: integer
+          description: 近N天 7 30 90 180 365
+          format: int32
+        description:
+          type: string
+          description: 描述
+        id:
+          type: integer
+          description: id
+          format: int64
+        isNotify:
+          type: integer
+          description: 是否推送【基于当前登录用户】0否1是
+          format: int32
+        isOpenShare:
+          type: integer
+          description: 查询是否分享我的仓位 0否1是
+          format: int32
+        isOpenTradingSet:
+          type: integer
+          description: 查询实盘是否开启 0否1是
+          format: int32
+        isSub:
+          type: integer
+          description: 是否订阅【基于当前登录用户】0否1是
+          format: int32
+        lastTradeTime:
+          type: integer
+          description: 最后的交易时间
+          format: int64
+        lossTrades:
+          type: number
+          description: 亏损次数
+          format: bigdecimal
+        name:
+          type: string
+          description: 用户名
+        plrate:
+          type: string
+        profitTrades:
+          type: number
+          description: 盈利次数
+          format: bigdecimal
+        subUsers:
+          type: integer
+          description: 订阅人数
+          format: int32
+        tenantId:
+          type: integer
+          format: int64
+        totalAmount:
+          type: number
+          description: 总资产(USDT)
+          format: bigdecimal
+        totalPL:
+          type: number
+          description: 总盈亏
+          format: bigdecimal
+        totalProfitRate:
+          type: number
+          description: 累计收益率
+          format: bigdecimal
+        totalTrades:
+          type: number
+          description: 总交易次数
+          format: bigdecimal
+        userGroupId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          description: 用户id
+          format: int64
+        winRate:
+          type: number
+          description: 胜率
+          format: bigdecimal
+    SmartMoneySubAccountVO:
+      title: SmartMoneySubAccountVO
+      type: object
+      properties:
+        accountId:
+          type: string
+        isSmartMoneyAccount:
+          type: boolean
+          description: 是否聪明钱账号
+          example: false
+        name:
+          type: string
+          description: 用户名
+        tenantId:
+          type: integer
+          format: int64
+        userGroupId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          description: 用户id
+          format: int64
+    TraderInfoSelfVO:
+      title: TraderInfoSelfVO
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: 帐户id
+        avatar:
+          type: string
+          description: 头像
+        avgHoldTime:
+          type: number
+          description: 平均持仓时间
+          format: bigdecimal
+        avgLoss:
+          type: number
+          description: 平均亏损
+          format: bigdecimal
+        avgProfit:
+          type: number
+          description: 平均盈利
+          format: bigdecimal
+        avgTradeTimes:
+          type: number
+          description: 平均每天交易频次
+          format: bigdecimal
+        bigDrawdown:
+          type: number
+          description: 最大回撤
+          format: bigdecimal
+        days:
+          type: integer
+          description: 近N天 7 30 90 180 365
+          format: int32
+        description:
+          type: string
+          description: 描述
+        id:
+          type: integer
+          description: id
+          format: int64
+        isMaster:
+          type: boolean
+          description: 登录账号是否为主账号 0否1是
+          example: false
+        isOpenShare:
+          type: integer
+          description: 查询是否分享我的仓位 0否1是
+          format: int32
+        isOpenTradingSet:
+          type: integer
+          description: 查询实盘是否开启 0否1是
+          format: int32
+        lastTradeTime:
+          type: integer
+          description: 最后的交易时间
+          format: int64
+        lossTrades:
+          type: number
+          description: 亏损次数
+          format: bigdecimal
+        name:
+          type: string
+          description: 用户名
+        plrate:
+          type: string
+        profitTrades:
+          type: number
+          description: 盈利次数
+          format: bigdecimal
+        subAccountVOList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SmartMoneySubAccountVO'
+        subUsers:
+          type: integer
+          description: 订阅人数
+          format: int32
+        tenantId:
+          type: integer
+          format: int64
+        totalAmount:
+          type: number
+          description: 总资产(USDT)
+          format: bigdecimal
+        totalPL:
+          type: number
+          description: 总盈亏
+          format: bigdecimal
+        totalProfitRate:
+          type: number
+          description: 累计收益率
+          format: bigdecimal
+        totalTrades:
+          type: number
+          description: 总交易次数
+          format: bigdecimal
+        userGroupId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          description: 用户id
+          format: int64
+        winRate:
+          type: number
+          description: 胜率
+          format: bigdecimal
+    TopTraderCumulativeVO:
+      title: TopTraderCumulativeVO
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: 帐户id
+        days:
+          type: integer
+          description: 近N天 7 30 90 180 365
+          format: int32
+        totalAmountList:
+          type: array
+          description: 累计资产波动
+          items:
+            $ref: '#/components/schemas/AmountDTO'
+        totalProfitList:
+          type: array
+          description: 累计收益额波动
+          items:
+            $ref: '#/components/schemas/AmountDTO'
+        totalProfitRateList:
+          type: array
+          description: 累计收益率波动
+          items:
+            $ref: '#/components/schemas/AmountDTO'
+        userId:
+          type: integer
+          description: 用户id
+          format: int64
+    Component:
+      title: 更新描述请求参数
+      required:
+      - accountId
+      type: object
+      properties:
+        accountId:
+          type: integer
+          description: 交易员accountId
+          format: int64
+        desc:
+          type: string
+          description: 描述信息
+    TopTraderVO:
+      title: TopTraderVO
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: 帐户id
+        avatar:
+          type: string
+          description: 头像
+        cumulative:
+          description: 近N天资产数据
+          $ref: '#/components/schemas/TopTraderCumulativeVO'
+        days:
+          type: integer
+          description: 近N天 7 30 90 180 365
+          format: int32
+        id:
+          type: integer
+          description: id
+          format: int64
+        isNotify:
+          type: integer
+          description: 是否推送【基于当前登录用户】1是 0否
+          format: int32
+        isOpenTradingSet:
+          type: integer
+          description: 查询实盘是否开启 0否1是
+          format: int32
+        isSub:
+          type: integer
+          description: 是否订阅【基于当前登录用户】1是 0否
+          format: int32
+        lastTradeTime:
+          type: integer
+          description: 最近交易时间
+          format: int64
+        nickname:
+          type: string
+          description: 昵称
+        positionStatus:
+          type: integer
+          description: 仓位状态  1 持仓中 2无持仓 3 未分享 4 已关闭
+          format: int32
+        subUsers:
+          type: integer
+          description: 订阅人数
+          format: int32
+        tenantId:
+          type: integer
+          format: int64
+        totalAmount:
+          type: number
+          description: 总资产(USDT)
+          format: bigdecimal
+        totalPL:
+          type: number
+          description: 总盈亏
+          format: bigdecimal
+        totalProfitRate:
+          type: number
+          description: 累计收益率
+          format: bigdecimal
+        userGroupId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          description: 用户id
+          format: int64
+    CommonResponse_PageResult_TopTraderVO:
+      title: CommonResponse«PageResult«TopTraderVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/PageResult_TopTraderVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_TopTraderCumulativeVO:
+      title: CommonResponse«TopTraderCumulativeVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/TopTraderCumulativeVO'
+        returnCode:
+          type: integer
+          format: int32
+    CompatResponseDTO_List_AccountFunVO:
+      title: CompatResponseDTO«List«AccountFunVO»»
+      type: object
+      properties:
+        ma:
+          type: array
+          items:
+            type: object
+        mc:
+          type: string
+        rc:
+          type: integer
+          format: int32
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountFunVO'
+    CompatResponseDTO_AccountFunVO:
+      title: CompatResponseDTO«AccountFunVO»
+      type: object
+      properties:
+        ma:
+          type: array
+          items:
+            type: object
+        mc:
+          type: string
+        rc:
+          type: integer
+          format: int32
+        result:
+          $ref: '#/components/schemas/AccountFunVO'
+    CompatResponseDTO_BalanceConvertVO:
+      title: CompatResponseDTO«BalanceConvertVO»
+      type: object
+      properties:
+        ma:
+          type: array
+          items:
+            type: object
+        mc:
+          type: string
+        rc:
+          type: integer
+          format: int32
+        result:
+          $ref: '#/components/schemas/BalanceConvertVO'
+    AccountFunVO:
+      title: AccountFunVO
+      type: object
+      properties:
+        accountId:
+          type: integer
+          description: 帐户id
+          format: int64
+        amount:
+          type: number
+          description: 可用 ===>>> 更改为净资产余额
+          format: bigdecimal
+        bonus:
+          type: number
+          description: 体验金
+          format: bigdecimal
+        coin:
+          type: string
+          description: 币种
+        convertBtcAmount:
+          type: number
+          description: walletBalance钱包资产折算 BTC
+          format: bigdecimal
+        convertUsdtAmount:
+          type: number
+          description: walletBalance钱包资产折算 USDT
+          format: bigdecimal
+        coupon:
+          type: number
+          description: 抵扣金
+          format: bigdecimal
+        crossedMargin:
+          type: number
+          description: 全仓保证金冻结
+          format: bigdecimal
+        depositCoupon:
+          type: number
+          description: 储蓄券
+          format: bigdecimal
+        isolatedMargin:
+          type: number
+          description: 保证金冻结
+          format: bigdecimal
+        marginBalance:
+          type: number
+          description: 保证金余额
+          format: bigdecimal
+        notProfit:
+          type: number
+          description: 未实现盈亏
+          format: bigdecimal
+        openOrderFeeFrozen:
+          type: number
+          description: 开仓委托冻结手续费
+          format: bigdecimal
+        openOrderMarginFrozen:
+          type: number
+          description: 订单冻结
+          format: bigdecimal
+        profit:
+          type: number
+          description: 已盈亏
+          format: bigdecimal
+        totalAmount:
+          type: number
+          description: 总资金：币种余额 + 未实现盈亏 ===>>>> 更新为保证金余额
+          format: bigdecimal
+        underlyingType:
+          type: integer
+          description: 币本位，u本位
+          format: int32
+        userId:
+          type: integer
+          description: 用户id
+          format: int64
+        walletBalance:
+          type: number
+          description: 币种余额
+          format: bigdecimal
+    CompatResponseDTO_List_string:
+      title: CompatResponseDTO«List«string»»
+      type: object
+      properties:
+        ma:
+          type: array
+          items:
+            type: object
+        mc:
+          type: string
+        rc:
+          type: integer
+          format: int32
+        result:
+          type: array
+          items:
+            type: string
+    BalanceConvertVO:
+      title: BalanceConvertVO
+      type: object
+      properties:
+        coin:
+          type: string
+          description: 币种
+        convert:
+          type: number
+          description: btc转化值
+          format: bigdecimal
+        usdtConvert:
+          type: number
+          description: usdt转化值
+          format: bigdecimal
+    CompatResponseDTO_boolean:
+      title: CompatResponseDTO«boolean»
+      type: object
+      properties:
+        ma:
+          type: array
+          items:
+            type: object
+        mc:
+          type: string
+        rc:
+          type: integer
+          format: int32
+        result:
+          type: boolean
+    TakerOverVO:
+      title: TakerOverVO
+      type: object
+      properties:
+        coin:
+          type: string
+          description: 币种
+        createdTime:
+          type: integer
+          description: 时间
+          format: int64
+        id:
+          type: integer
+          description: id
+          format: int64
+        markPrice:
+          type: number
+          description: 接管价格
+          format: bigdecimal
+        nominalValue:
+          type: number
+          description: 金额
+          format: bigdecimal
+        positionSide:
+          type: string
+          description: 仓位方向
+        positionSize:
+          type: number
+          description: 仓位数量
+          format: bigdecimal
+        symbol:
+          type: string
+          description: 交易对
+        welfareAccount:
+          type: boolean
+          description: 是否体验金账户
+          example: false
+    MongoPageResult_TakerOverVO:
+      title: MongoPageResult«TakerOverVO»
+      type: object
+      properties:
+        hasNext:
+          type: boolean
+          description: 是否有下一页
+          example: false
+        hasPrev:
+          type: boolean
+          description: 是否有上一页
+          example: false
+        items:
+          type: array
+          description: 数据列表
+          items:
+            $ref: '#/components/schemas/TakerOverVO'
+    CommonResponse_MongoPageResult_TakerOverVO:
+      title: CommonResponse«MongoPageResult«TakerOverVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/MongoPageResult_TakerOverVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_AccountInfoVO:
+      title: CommonResponse«AccountInfoVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/AccountInfoVO'
+        returnCode:
+          type: integer
+          format: int32
+    AccountInfoVO:
+      title: AccountInfoVO
+      type: object
+      properties:
+        accountId:
+          type: integer
+          description: 帐户id
+          format: int64
+        allowOpenPosition:
+          type: boolean
+          description: 是否可开仓
+          example: false
+        allowTrade:
+          type: boolean
+          description: 是否可以交易
+          example: false
+        allowTransfer:
+          type: boolean
+          description: 是否可以划转
+          example: false
+        openTime:
+          type: string
+          description: 开通时间
+          format: date-time
+        state:
+          type: integer
+          description: 用户状态
+          format: int32
+        userGroupId:
+          type: integer
+          description: 用户组别
+          format: int64
+        userId:
+          type: integer
+          description: 用户id
+          format: int64
+    SatisfactionFeedbackTypeDTO:
+      title: SatisfactionFeedbackTypeDTO
+      type: object
+      properties:
+        code:
+          type: string
+        desc:
+          type: string
+    CommonResponse_List_SatisfactionFeedbackTypeDTO:
+      title: CommonResponse«List«SatisfactionFeedbackTypeDTO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SatisfactionFeedbackTypeDTO'
+        returnCode:
+          type: integer
+          format: int32
+    WelfareCouponSymbol:
+      title: WelfareCouponSymbol
+      type: object
+      properties:
+        contractType:
+          type: string
+          description: 合约类型：PERPETUAL(永续合约)、PREDICT(预测合约)
+        symbol:
+          type: string
+          description: 交易对
+    CommonResponse_MongoPageResult_DepositCouponDetailVO:
+      title: CommonResponse«MongoPageResult«DepositCouponDetailVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/MongoPageResult_DepositCouponDetailVO'
+        returnCode:
+          type: integer
+          format: int32
+    MongoPageResult_BonusDetailVO:
+      title: MongoPageResult«BonusDetailVO»
+      type: object
+      properties:
+        hasNext:
+          type: boolean
+          description: 是否有下一页
+          example: false
+        hasPrev:
+          type: boolean
+          description: 是否有上一页
+          example: false
+        items:
+          type: array
+          description: 数据列表
+          items:
+            $ref: '#/components/schemas/BonusDetailVO'
+    CommonResponse_List_WelfareCoupon:
+      title: CommonResponse«List«WelfareCoupon»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/WelfareCoupon'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_MongoPageResult_BonusDetailVO:
+      title: CommonResponse«MongoPageResult«BonusDetailVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/MongoPageResult_BonusDetailVO'
+        returnCode:
+          type: integer
+          format: int32
+    BonusDetailVO:
+      title: BonusDetailVO
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: bigdecimal
+        bizId:
+          type: string
+        bonus:
+          type: number
+          description: 体验金
+          format: bigdecimal
+        currency:
+          type: string
+          description: 币种
+        currencyId:
+          type: integer
+          format: int64
+        disRate:
+          type: number
+          description: 抵扣比例
+          format: bigdecimal
+        expireTime:
+          type: integer
+          description: 失效时间
+          format: int64
+        recAmount:
+          type: number
+          format: bigdecimal
+        useAmount:
+          type: number
+          format: bigdecimal
+        userId:
+          type: integer
+          format: int64
+    DepositCouponDetailVO:
+      title: DepositCouponDetailVO
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          description: 储值券金额
+          format: bigdecimal
+        bizId:
+          type: string
+        currency:
+          type: string
+          description: 币种
+        currencyId:
+          type: integer
+          format: int64
+        expireTime:
+          type: integer
+          description: 失效时间
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    WelfareCoupon:
+      title: WelfareCoupon
+      type: object
+      properties:
+        amount:
+          type: number
+          description: 面值
+          format: bigdecimal
+        coin:
+          type: string
+          description: 币种
+        contractType:
+          type: string
+          description: 合约类型：PERPETUAL(永续合约)、PREDICT(预测合约)
+        endTime:
+          type: integer
+          description: 优惠券有效期:结束时间
+          format: int64
+        leverage:
+          type: integer
+          description: 杠杆
+          format: int32
+        positionType:
+          type: string
+          description: 仓位类型:CROSSED 全仓,ISOLATED:逐仓
+        startTime:
+          type: integer
+          description: 优惠券有效期:开始时间
+          format: int64
+        symbol:
+          type: string
+          description: 交易对
+        symbols:
+          type: array
+          description: 交易对信息集合
+          items:
+            $ref: '#/components/schemas/WelfareCouponSymbol'
+        type:
+          type: string
+          description: 卡券类型:FUTURE_EXPERIENCE 合约体验金券
+        welfareId:
+          type: integer
+          description: welfareId
+          format: int64
+    MongoPageResult_DepositCouponDetailVO:
+      title: MongoPageResult«DepositCouponDetailVO»
+      type: object
+      properties:
+        hasNext:
+          type: boolean
+          description: 是否有下一页
+          example: false
+        hasPrev:
+          type: boolean
+          description: 是否有上一页
+          example: false
+        items:
+          type: array
+          description: 数据列表
+          items:
+            $ref: '#/components/schemas/DepositCouponDetailVO'
+    AutoDeleverageHistoryVO:
+      title: AutoDeleverageHistoryVO
+      type: object
+      properties:
+        createdTime:
+          type: integer
+          description: 时间
+          format: int64
+        id:
+          type: integer
+          description: id
+          format: int64
+        positionSide:
+          type: string
+          description: 仓位方向：Long:多;SHORT:空
+        price:
+          type: number
+          description: 价格
+          format: bigdecimal
+        quantity:
+          type: number
+          description: 数量
+          format: bigdecimal
+        realizedProfit:
+          type: number
+          description: 平仓盈亏
+          format: bigdecimal
+        symbol:
+          type: string
+          description: 交易对
+        welfareAccount:
+          type: boolean
+          description: 是否体验金
+          example: false
+    MongoPageResult_AutoDeleverageHistoryVO:
+      title: MongoPageResult«AutoDeleverageHistoryVO»
+      type: object
+      properties:
+        hasNext:
+          type: boolean
+          description: 是否有下一页
+          example: false
+        hasPrev:
+          type: boolean
+          description: 是否有上一页
+          example: false
+        items:
+          type: array
+          description: 数据列表
+          items:
+            $ref: '#/components/schemas/AutoDeleverageHistoryVO'
+    CommonResponse_MongoPageResult_AutoDeleverageHistoryVO:
+      title: CommonResponse«MongoPageResult«AutoDeleverageHistoryVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/MongoPageResult_AutoDeleverageHistoryVO'
+        returnCode:
+          type: integer
+          format: int32
+    MongoPageResult_FundRateRecordDetailVO:
+      title: MongoPageResult«FundRateRecordDetailVO»
+      type: object
+      properties:
+        hasNext:
+          type: boolean
+          description: 是否有下一页
+          example: false
+        hasPrev:
+          type: boolean
+          description: 是否有上一页
+          example: false
+        items:
+          type: array
+          description: 数据列表
+          items:
+            $ref: '#/components/schemas/FundRateRecordDetailVO'
+    CommonResponse_BalanceVO:
+      title: CommonResponse«BalanceVO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/BalanceVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_MongoPageResult_FundRateRecordDetailVO:
+      title: CommonResponse«MongoPageResult«FundRateRecordDetailVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/MongoPageResult_FundRateRecordDetailVO'
+        returnCode:
+          type: integer
+          format: int32
+    FundRateRecordDetailVO:
+      title: FundRateRecordDetailVO
+      type: object
+      properties:
+        cast:
+          type: number
+          description: 资金费用
+          format: bigdecimal
+        coin:
+          type: string
+          description: 币种
+        createdTime:
+          type: integer
+          description: 时间
+          format: int64
+        id:
+          type: integer
+          description: id
+          format: int64
+        positionSide:
+          type: string
+          description: 方向
+        symbol:
+          type: string
+          description: 交易对
+    BalanceVO:
+      title: BalanceVO
+      type: object
+      properties:
+        availableBalance:
+          type: number
+          description: 可用余额
+          format: bigdecimal
+        bonus:
+          type: number
+          description: 体验金余额
+          format: bigdecimal
+        bonusDisRate:
+          type: number
+          description: 体验金抵扣率
+          format: bigdecimal
+        coin:
+          type: string
+          description: 币种
+        coupon:
+          type: number
+          description: 抵扣金余额
+          format: bigdecimal
+        crossedMargin:
+          type: number
+          description: 全仓起始保证金
+          format: bigdecimal
+        depositCoupon:
+          type: number
+          description: 储值券金额
+          format: bigdecimal
+        isolatedMargin:
+          type: number
+          description: 逐仓保证金冻结
+          format: bigdecimal
+        openOrderFeeFrozen:
+          type: number
+          description: 开仓单冻结手续费
+          format: bigdecimal
+        openOrderMarginFrozen:
+          type: number
+          description: 订单冻结
+          format: bigdecimal
+        walletBalance:
+          type: number
+          description: 钱包余额
+          format: bigdecimal
+    PageResult_CouponRecordVO:
+      title: PageResult«CouponRecordVO»
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CouponRecordVO'
+        page:
+          type: integer
+          format: int64
+        ps:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+    CommonResponse_MongoPageResult_BalanceBillVO:
+      title: CommonResponse«MongoPageResult«BalanceBillVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/MongoPageResult_BalanceBillVO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_object:
+      title: CommonResponse«object»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: object
+        returnCode:
+          type: integer
+          format: int32
+    MongoPageResult_BalanceBillVO:
+      title: MongoPageResult«BalanceBillVO»
+      type: object
+      properties:
+        hasNext:
+          type: boolean
+          description: 是否有下一页
+          example: false
+        hasPrev:
+          type: boolean
+          description: 是否有上一页
+          example: false
+        items:
+          type: array
+          description: 数据列表
+          items:
+            $ref: '#/components/schemas/BalanceBillVO'
+    CommonResponse_PageResult_CouponRecordVO:
+      title: CommonResponse«PageResult«CouponRecordVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/PageResult_CouponRecordVO'
+        returnCode:
+          type: integer
+          format: int32
+    BalanceBillVO:
+      title: BalanceBillVO
+      type: object
+      properties:
+        accountId:
+          type: integer
+          description: 帐户id
+          format: int64
+        afterAmount:
+          type: number
+          description: 变动后余额
+          format: bigdecimal
+        amount:
+          type: number
+          description: 数量
+          format: bigdecimal
+        bonus:
+          type: number
+          description: 包含的体验金数量
+          format: bigdecimal
+        bonusDisRate:
+          type: number
+          description: 触发时的体验金抵扣率
+          format: bigdecimal
+        coin:
+          type: string
+          description: 币种
+        createdTime:
+          type: integer
+          description: 时间
+          format: int64
+        id:
+          type: integer
+          description: id
+          format: int64
+        side:
+          type: string
+          description: ADD:划入;SUB:转出
+        symbol:
+          type: string
+          description: 交易对
+        type:
+          type: string
+          description: EXCHANGE:划转;CLOSE_POSITION:平仓盈亏;TAKE_OVER:仓位接管;QIANG_PING_MANAGER:强平管理费（手续费）;FUND:资金费用;FEE:手续费 (开仓、平仓、强平);ADL:自动减仓;TAKE_OVER:仓位接管MERGE:仓位合并
+    CommonResponse_List_BalanceVO:
+      title: CommonResponse«List«BalanceVO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/BalanceVO'
+        returnCode:
+          type: integer
+          format: int32
+    CouponRecordVO:
+      title: CouponRecordVO
+      type: object
+      properties:
+        amount:
+          type: number
+          description: 数量
+          format: bigdecimal
+        coin:
+          type: string
+          description: 币种
+        expireTime:
+          type: integer
+          description: 过期时间
+          format: int64
+        validTime:
+          type: integer
+          description: 领取时间
+          format: int64
+    UploadUrlDTO:
+      title: UploadUrlDTO
+      type: object
+      properties:
+        miniUrl:
+          type: string
+          description: 压缩图url
+        url:
+          type: string
+          description: 原图url
+    CommonResponse_List_StepRateDTO:
+      title: CommonResponse«List«StepRateDTO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepRateDTO'
+        returnCode:
+          type: integer
+          format: int32
+    PageResult_UserRecentTradeDTO:
+      title: PageResult«UserRecentTradeDTO»
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRecentTradeDTO'
+        page:
+          type: integer
+          format: int64
+        ps:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+    CommonResponse_UserStepRateDTO:
+      title: CommonResponse«UserStepRateDTO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/UserStepRateDTO'
+        returnCode:
+          type: integer
+          format: int32
+    CommonResponse_UploadUrlDTO:
+      title: CommonResponse«UploadUrlDTO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/UploadUrlDTO'
+        returnCode:
+          type: integer
+          format: int32
+    UserRecentTradeDTO:
+      title: UserRecentTradeDTO
+      type: object
+      properties:
+        coinBasedTradeVolume:
+          type: number
+          description: 币本位合计
+          format: bigdecimal
+        statsTime:
+          type: string
+          description: 统计日期
+          format: date-time
+        totalTradeVolume:
+          type: number
+          description: 总计
+          format: bigdecimal
+        uBasedTradeVolume:
+          type: number
+          description: U本位合计
+          format: bigdecimal
+        ubasedTradeVolume:
+          type: number
+          format: bigdecimal
+    UserStepApplyDTO:
+      title: UserStepApplyDTO
+      type: object
+      properties:
+        applyStepRateId:
+          type: integer
+          description: 申请阶梯Id
+          format: int64
+        miniImageUrl:
+          type: array
+          description: 缩略图url，数组
+          items:
+            type: string
+        source:
+          type: string
+          description: 申请来源，多个、分隔
+        sourceUrl:
+          type: array
+          description: 图片url，数组
+          items:
+            type: string
+    CommonResponse_PageResult_UserRecentTradeDTO:
+      title: CommonResponse«PageResult«UserRecentTradeDTO»»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/PageResult_UserRecentTradeDTO'
+        returnCode:
+          type: integer
+          format: int32
+    UserStepRateDTO:
+      title: UserStepRateDTO
+      type: object
+      properties:
+        coinBasedTotalTradeVolume:
+          type: number
+          description: 近29天+今天, 币本位交易量
+          format: bigdecimal
+        discountLevel:
+          type: integer
+          description: 折扣等级
+          format: int32
+        lackTradeVolume:
+          type: number
+          description: 下一个等级相差的交易量
+          format: bigdecimal
+        lackWalletBalance:
+          type: number
+          description: 下一个等级相差的钱包余额
+          format: bigdecimal
+        levelReturnDay:
+          type: integer
+          description: 当前等级保留天数
+          format: int32
+        makerFee:
+          type: number
+          description: maker费率
+          format: bigdecimal
+        nextLvMakerFee:
+          type: number
+          description: 下一个等级Maker费率
+          format: bigdecimal
+        nextLvTakerFee:
+          type: number
+          description: 下一个等级Taker费率
+          format: bigdecimal
+        nextLvTradeVolume:
+          type: number
+          description: 下一个等级交易量
+          format: bigdecimal
+        nextLvWalletBalance:
+          type: number
+          description: 下一个等级钱包余额
+          format: bigdecimal
+        notProfit:
+          type: number
+          description: 仓位未实现盈亏(USDT, 10分钟更新
+          format: bigdecimal
+        specialType:
+          type: boolean
+          description: 是否是特殊帐号
+          example: false
+        stepRateProName:
+          type: string
+          description: 专业费率名称
+        takerFee:
+          type: number
+          description: taker费率
+          format: bigdecimal
+        totalTradeVolume:
+          type: number
+          description: 近29天+今天, 交易量(10分钟更新)
+          format: bigdecimal
+        uBasedTotalTradeVolume:
+          type: number
+          description: 近29天+今天, U本位交易量
+          format: bigdecimal
+        ubasedTotalTradeVolume:
+          type: number
+          format: bigdecimal
+        vipProType:
+          type: boolean
+          description: 是否是专业费率
+          example: false
+        walletBalance:
+          type: number
+          description: 账户权益(USDT, 10分钟更新）：钱包余额+未实现盈亏
+          format: bigdecimal
+    StepRateDTO:
+      title: StepRateDTO
+      type: object
+      properties:
+        createdTime:
+          type: string
+          description: 创建时间
+          format: date-time
+        creator:
+          type: string
+          description: 创建人
+        id:
+          type: integer
+          description: id
+          format: int64
+        levelRetentionDay:
+          type: integer
+          description: 等级保留天数(0，100)
+          format: int32
+        makerFee:
+          type: number
+          description: maker费率
+          format: bigdecimal
+        remark:
+          type: string
+          description: 备注
+        stepName:
+          type: string
+          description: 等级名称，仅名称不会有逻辑
+        takerFee:
+          type: number
+          description: taker费率
+          format: bigdecimal
+        tradeVolume:
+          type: number
+          description: 交易下限量(usdt)，排序用
+          format: bigdecimal
+        updatedTime:
+          type: string
+          description: 更新时间
+          format: date-time
+        updater:
+          type: string
+          description: 更新人
+        walletBalance:
+          type: number
+          description: 钱包余额下限(usdt)
+          format: bigdecimal
+    UserStepApplyResultDTO:
+      title: UserStepApplyResultDTO
+      type: object
+      properties:
+        state:
+          type: integer
+          description: 状态：0 待审核 1审核通过 2审核拒绝
+          format: int32
+        tempLevel:
+          type: integer
+          description: 临时等级
+          format: int32
+        tempLevelReturnDay:
+          type: integer
+          description: 临时等级保留天数
+          format: int32
+    CommonResponse_UserStepApplyResultDTO:
+      title: CommonResponse«UserStepApplyResultDTO»
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+        msgInfo:
+          type: string
+        result:
+          $ref: '#/components/schemas/UserStepApplyResultDTO'
+        returnCode:
+          type: integer
+          format: int32
+    UserCollectionDTO:
+      title: UserCollectionDTO
+      required:
+      - symbols
+      type: object
+      properties:
+        symbols:
+          type: array
+          description: 全量更新自选交易对,每次操作必须传数组，全部删除了就是也需要传空数组
+          items:
+            type: string
+x-refined-from:
+- xt-com-biz-quotation.yml
+- xt-com-biz-user.yml
+- xt-com-futures-market-openapi.yml
+- xt-com-futures-user-openapi.yml
