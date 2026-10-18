@@ -152,7 +152,8 @@ apis:
   description: Contract Info Controller
   humanURL: https://doc.xt.com/futures
   baseURL: https://fapi.xt.com/future/market
-  tags:
+  tags: []
+  tags_raw:
   - 合约信息
   properties:
   - type: OpenAPI
@@ -191,7 +192,8 @@ apis:
   description: Listen Key Controller
   humanURL: https://doc.xt.com/futures
   baseURL: https://fapi.xt.com/future/market
-  tags:
+  tags: []
+  tags_raw:
   - listenKey
   properties:
   - type: OpenAPI
@@ -231,6 +233,8 @@ apis:
   humanURL: https://doc.xt.com/futures
   baseURL: https://fapi.xt.com/future/market
   tags:
+  - Order
+  tags_raw:
   - 合约聪明钱-order
   properties:
   - type: OpenAPI
@@ -309,6 +313,8 @@ apis:
   humanURL: https://doc.xt.com/futures
   baseURL: https://fapi.xt.com/future/market
   tags:
+  - v2
+  tags_raw:
   - 获取交易对配置信息(v2)
   properties:
   - type: OpenAPI
@@ -348,6 +354,8 @@ apis:
   humanURL: https://doc.xt.com/futures
   baseURL: https://fapi.xt.com/future/market
   tags:
+  - v3
+  tags_raw:
   - 获取交易对配置信息(v3)
   properties:
   - type: OpenAPI
